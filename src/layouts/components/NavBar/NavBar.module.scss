@@ -1,0 +1,25 @@
+.main-header {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-flow: row nowrap;
+  border-bottom: 1px solid #dee2e6;
+  height: 57px;
+  padding: 0.5rem 0.5rem;
+  z-index: 1034;
+  transition: margin-left 0.3s ease-in-out;
+}
+
+.navbar-nav {
+  display: flex;
+}
+
+.nav-link {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: rgba(0, 0, 0, 0.5);
+  height: 2.5rem;
+  position: relative;
+}

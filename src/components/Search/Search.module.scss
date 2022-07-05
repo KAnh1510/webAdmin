@@ -1,0 +1,37 @@
+.search {
+  display: flex;
+
+  input {
+    flex: 1;
+    color: #000;
+    font-size: 1rem;
+    height: 40px;
+    background-color: transparent;
+    caret-color: var(--primary);
+    padding: 0 10px;
+    border: 1px solid #ccc;
+    display: block;
+  }
+
+  input:focus-within ~ .search-btn {
+    color: rgba(22, 24, 35, 0.75);
+  }
+
+  &:focus-within {
+    border-color: var(--primary);
+  }
+}
+
+.search-btn {
+  border: 1px solid #ccc;
+  padding: 0 10px;
+  color: rgba(22, 24, 35, 0.34);
+  &:hover {
+    background-color: rgba(22, 24, 35, 0.03);
+    cursor: pointer;
+  }
+
+  &:active {
+    background-color: rgba(22, 24, 35, 0.03);
+  }
+}

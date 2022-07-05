@@ -1,0 +1,92 @@
+.navigation {
+  position: relative;
+  height: 100vh;
+  width: 300px;
+  box-sizing: initial;
+  background-color: #2b343b;
+  transition: width 0.5s;
+  overflow: hidden;
+
+  &::after {
+    content: "";
+    background-color: #4187f6;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 999;
+    width: 10px;
+  }
+
+  &.active {
+    width: 70px;
+  }
+
+  ul {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: inherit;
+    padding-left: 5px;
+    padding-top: 70px;
+
+    li {
+      position: relative;
+      list-style: none;
+      border-top-left-radius: 20px;
+      border-bottom-left-radius: 20px;
+
+      a {
+        position: relative;
+        width: 100%;
+        display: flex;
+        text-decoration: none;
+        color: #fff;
+
+        &.active {
+          background: #4187f6;
+        }
+
+        .icon {
+          position: relative;
+          display: block;
+          min-width: 60px;
+          height: 60px;
+          line-height: 70px;
+          text-align: center;
+
+          ion-icon {
+            font-size: 1.5em;
+          }
+        }
+
+        .title {
+          position: relative;
+          padding-left: 10px;
+          height: 60px;
+          line-height: 60px;
+          white-space: normal;
+        }
+      }
+    }
+  }
+}
+
+.toggle {
+  position: fixed;
+  top: 10px;
+  left: 12px;
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  ion-icon {
+    position: absolute;
+    color: #4187f6;
+    font-size: 34px;
+  }
+}

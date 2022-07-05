@@ -1,0 +1,423 @@
+{
+  "role": [
+    {
+      "id": 1,
+      "role": "admin"
+    },
+    {
+      "id": 1,
+      "role": "user"
+    }
+  ],
+  "users": [
+    {
+      "id": 3,
+      "name": "Anh",
+      "email": "anh@gmail.com",
+      "address": "25, rue Lauriston, Paris, France",
+      "phoneNumber": "(503) 555-9931",
+      "birthday": " 11/10/2000",
+      "role": "admin",
+      "gender": "Nữ",
+      "password": "311111"
+    },
+    {
+      "id": 4,
+      "name": "Nguyễn Văn A",
+      "email": "nva@gmail.com",
+      "address": "89 Chiaroscuro Rd, Portland, USA",
+      "phoneNumber": "(171) 555-2222",
+      "birthday": " 11/10/2000",
+      "role": "user",
+      "gender": "Nam",
+      "password": "211111"
+    }
+  ],
+  "collection": [
+    {
+      "id": 1,
+      "title": "Tee"
+    },
+    {
+      "id": 2,
+      "title": "Sweater"
+    },
+    {
+      "id": 3,
+      "title": "Shirt"
+    },
+    {
+      "id": 4,
+      "title": "Croptop"
+    },
+    {
+      "title": "Hoodie",
+      "id": 5
+    },
+    {
+      "title": "Jacket",
+      "id": 6
+    },
+    {
+      "title": "Pants",
+      "id": 7
+    },
+    {
+      "title": "Skirt",
+      "id": 8
+    },
+    {
+      "title": "Accessories",
+      "id": 9
+    }
+  ],
+  "product": [
+    {
+      "id": 1,
+      "name": "CND SUMMER TEE BLUE",
+      "subtle": "AOSM0044",
+      "collection_id": 1,
+      "prices": 320000,
+      "imgFront": "https://product.hstatic.net/200000436739/product/a0ddcb1a-8a15-4b28-973e-baf6900b076e_50ba0323a16a41f19541ff86978f0a2b_master.jpeg",
+      "imgBack": "https://product.hstatic.net/200000436739/product/aa4c5674-1772-4b8c-9e89-bd0393430425_0a1b37baa06b4de08d14a31c61369202_grande.jpeg",
+      "desc": "",
+      "color": [],
+      "size": [
+        {
+          "id": 1,
+          "name": "M"
+        },
+        {
+          "id": 2,
+          "name": "L"
+        }
+      ],
+      "gallery": [
+        {
+          "id": 1,
+          "src": "https://product.hstatic.net/200000436739/product/a0ddcb1a-8a15-4b28-973e-baf6900b076e_50ba0323a16a41f19541ff86978f0a2b_master.jpeg"
+        },
+        {
+          "id": 2,
+          "src": "https://product.hstatic.net/200000436739/product/aa4c5674-1772-4b8c-9e89-bd0393430425_0a1b37baa06b4de08d14a31c61369202_grande.jpeg"
+        },
+        {
+          "id": 3,
+          "src": "https://product.hstatic.net/200000436739/product/fe372a21-46ef-45e1-9030-d4398dfd97c1_62e28b686ce64e5f9ab8b2e6b5243453_master.jpeg"
+        },
+        {
+          "id": 4,
+          "src": "https://product.hstatic.net/200000436739/product/b559f2b1-4010-4444-bef4-bd649c07fc14_5f663a90dc6744aeacd9d560d8254686_master.jpeg"
+        }
+      ]
+    },
+    {
+      "name": "ÁO TAY DÀI CARAMEL SWEATER",
+      "subtle": "",
+      "collection_id": 2,
+      "prices": 420000,
+      "imgFront": "https://product.hstatic.net/200000436739/product/366ea83c-f73c-4282-a1d2-5087e7e94887_011b757fd91342bc9d1ccb2b80f12408_master.jpeg",
+      "imgBack": "https://product.hstatic.net/200000436739/product/b071dfd9-1797-433f-9393-ef80ef6c4791_7b78e576d6584834ae790eb332548f9e_master.jpeg",
+      "desc": "",
+      "id": 7,
+      "color": [
+        {
+          "idColor": "#000000",
+          "name_color": "Black"
+        },
+        {
+          "idColor": "#ffffff",
+          "name_color": "White"
+        }
+      ],
+      "size": [
+        {
+          "id": 1,
+          "name": "M"
+        },
+        {
+          "id": 2,
+          "name": "L"
+        }
+      ],
+      "gallery": [
+        {
+          "id": 1,
+          "src": "https://product.hstatic.net/200000436739/product/366ea83c-f73c-4282-a1d2-5087e7e94887_011b757fd91342bc9d1ccb2b80f12408_master.jpeg"
+        },
+        {
+          "id": 2,
+          "src": "https://product.hstatic.net/200000436739/product/b071dfd9-1797-433f-9393-ef80ef6c4791_7b78e576d6584834ae790eb332548f9e_master.jpeg"
+        },
+        {
+          "id": 3,
+          "src": "https://product.hstatic.net/200000436739/product/d66e1d5f-89af-4aaa-9646-70c6a695a81f_fc3db306da334f708f65f9f06a0f82c4_master.jpeg"
+        },
+        {
+          "id": 4,
+          "src": "https://product.hstatic.net/200000436739/product/3d2e94a8-c462-4b32-9237-5be6a0265230_54bd010771444b5ba60199199ac377fa_master.jpeg"
+        }
+      ]
+    },
+    {
+      "name": "CND SUMMER TEE TAN",
+      "subtle": " AOSM0073",
+      "collection_id": 1,
+      "prices": 320000,
+      "imgFront": "https://product.hstatic.net/200000436739/product/upload_d63850b1e37b49afb17f158896762fe6_master.jpg",
+      "imgBack": "https://product.hstatic.net/200000436739/product/upload_c2b84c52389f43499247fff1e83ca498_master.jpg",
+      "desc": "",
+      "color": [],
+      "size": [
+        {
+          "id": 1,
+          "name": "M"
+        },
+        {
+          "id": 2,
+          "name": "L"
+        }
+      ],
+      "gallery": [
+        {
+          "id": 1,
+          "src": "https://product.hstatic.net/200000436739/product/upload_d63850b1e37b49afb17f158896762fe6_master.jpg"
+        },
+        {
+          "id": 2,
+          "src": "https://product.hstatic.net/200000436739/product/upload_c2b84c52389f43499247fff1e83ca498_master.jpg"
+        },
+        {
+          "id": 3,
+          "src": "https://product.hstatic.net/200000436739/product/upload_e5bdff51b20b465fb9cf3423e35046cb_master.jpg"
+        },
+        {
+          "id": 4,
+          "src": "https://product.hstatic.net/200000436739/product/upload_b74c6058fe0947a4a084a8a34f950402_master.jpg"
+        }
+      ],
+      "id": 10
+    },
+    {
+      "name": "INFINITY TURBAN",
+      "subtle": "",
+      "collection_id": 9,
+      "prices": 100000,
+      "imgFront": "https://product.hstatic.net/200000436739/product/0db50047-70f4-4bc3-8e1e-9a48be0e49b0_a207335ee455425d9ebca682512e962b_master.jpeg",
+      "imgBack": "https://product.hstatic.net/200000436739/product/c59c8964-bc3e-43bd-b34a-666e85267f30_73a56cbd9b724ce79e0ca1ab1babde53_master.jpeg",
+      "desc": "",
+      "color": [
+        {
+          "idColor": "#000000",
+          "name_color": "Black"
+        },
+        {
+          "idColor": "#ffffff",
+          "name_color": "White"
+        }
+      ],
+      "size": [],
+      "gallery": [
+        {
+          "id": 1,
+          "src": "https://product.hstatic.net/200000436739/product/0db50047-70f4-4bc3-8e1e-9a48be0e49b0_a207335ee455425d9ebca682512e962b_master.jpeg"
+        },
+        {
+          "id": 2,
+          "src": "https://product.hstatic.net/200000436739/product/c59c8964-bc3e-43bd-b34a-666e85267f30_73a56cbd9b724ce79e0ca1ab1babde53_master.jpeg"
+        }
+      ],
+      "id": 11
+    },
+    {
+      "name": "QUẦN DÀI CND ESSENTIAL SWEATPANTS",
+      "subtle": "QUP0023",
+      "collection_id": 7,
+      "prices": 390000,
+      "imgFront": "https://product.hstatic.net/200000436739/product/upload_0eb338311a004b5da5cdcfe154515acc_master.jpg",
+      "imgBack": "https://product.hstatic.net/200000436739/product/upload_882ee0f59c1047658e7a7927cfe54553_master.jpg",
+      "desc": "",
+      "color": [
+        {
+          "idColor": "#000000",
+          "name_color": "Black"
+        },
+        {
+          "idColor": "#ffffff",
+          "name_color": "White"
+        }
+      ],
+      "size": [
+        {
+          "id": 1,
+          "name": "M"
+        }
+      ],
+      "gallery": [
+        {
+          "id": 1,
+          "src": "https://product.hstatic.net/200000436739/product/upload_0eb338311a004b5da5cdcfe154515acc_master.jpg"
+        },
+        {
+          "id": 2,
+          "src": "https://product.hstatic.net/200000436739/product/upload_882ee0f59c1047658e7a7927cfe54553_master.jpg"
+        },
+        {
+          "id": 3,
+          "src": "https://product.hstatic.net/200000436739/product/upload_60b421567e07477abeb63558eab99a38_master.jpg"
+        },
+        {
+          "id": 4,
+          "src": "https://product.hstatic.net/200000436739/product/upload_e1f94b21b8cc47abb8a0d4bd9edb0bc2_master.jpg"
+        }
+      ],
+      "id": 12
+    },
+    {
+      "name": "ÁO KHOÁC CÓ NÓN CND HOODIE LIGHT GREY",
+      "subtle": "AO00503",
+      "collection_id": 5,
+      "prices": 580000,
+      "imgFront": "https://product.hstatic.net/200000436739/product/upload_8906ab72b3de48719d1405a4a98a6a11_master.jpg",
+      "imgBack": "https://product.hstatic.net/200000436739/product/upload_0f991966221348ef8553e3fc304c618a_master.jpg",
+      "desc": "",
+      "color": [],
+      "size": [
+        {
+          "id": 1,
+          "name": "M"
+        },
+        {
+          "id": 1,
+          "name": "L"
+        }
+      ],
+      "gallery": [
+        {
+          "id": 1,
+          "src": "https://product.hstatic.net/200000436739/product/upload_8906ab72b3de48719d1405a4a98a6a11_master.jpg"
+        },
+        {
+          "id": 2,
+          "src": "https://product.hstatic.net/200000436739/product/upload_0f991966221348ef8553e3fc304c618a_master.jpg"
+        },
+        {
+          "id": 3,
+          "src": "https://product.hstatic.net/200000436739/product/upload_82808c14a3514e1d96ce373fe75da79a_master.jpg"
+        },
+        {
+          "id": 4,
+          "src": "https://product.hstatic.net/200000436739/product/upload_9c9cbc4c96ce43aeacc15eb685773d5e_master.jpg"
+        }
+      ],
+      "id": 13
+    },
+    {
+      "name": "CND ESSENTIAL CROPTOP BLACK",
+      "subtle": " CR0020",
+      "collection_id": 4,
+      "prices": 350000,
+      "imgFront": "https://product.hstatic.net/200000436739/product/upload_e1c7c18d2a574805afdc9cc8f01dceaa_master.jpg",
+      "imgBack": "https://product.hstatic.net/200000436739/product/upload_07bd965b82074eaaa80ef4874fd7056e_master.jpg",
+      "desc": "",
+      "color": [],
+      "size": [],
+      "gallery": [
+        {
+          "id": 1,
+          "src": "https://product.hstatic.net/200000436739/product/upload_e1c7c18d2a574805afdc9cc8f01dceaa_master.jpg"
+        },
+        {
+          "id": 2,
+          "src": "https://product.hstatic.net/200000436739/product/upload_07bd965b82074eaaa80ef4874fd7056e_master.jpg"
+        },
+        {
+          "id": 3,
+          "src": "https://product.hstatic.net/200000436739/product/upload_557483cf4b104867a6a2baf968d44e96_master.jpg"
+        },
+        {
+          "id": 4,
+          "src": "https://product.hstatic.net/200000436739/product/upload_156096c5cfe44e4abcb6280199f16bb0_master.jpg"
+        }
+      ],
+      "id": 14
+    },
+    {
+      "name": "ÁO SƠMI INFINITY SHIRT",
+      "subtle": "AO01102",
+      "collection_id": 3,
+      "prices": 590000,
+      "imgFront": "https://product.hstatic.net/200000436739/product/5d6db5f7-0627-480b-8c20-a28fb5449baa_ac98cb7fc1ff4cad881e8301ac97e36a_master.jpeg",
+      "imgBack": "https://product.hstatic.net/200000436739/product/ed6caabb-0b04-48e4-8543-b2851d729769_8cbf068240584a54902a7044ef3f894b_master.jpeg",
+      "desc": "",
+      "color": [
+        {
+          "idColor": "#000000",
+          "name_color": "Black"
+        },
+        {
+          "idColor": "#ffffff",
+          "name_color": "White"
+        },
+        {
+          "idColor": "#217537",
+          "name_color": "Green"
+        }
+      ],
+      "size": [
+        {
+          "id": 1,
+          "name": "M"
+        },
+        {
+          "id": 2,
+          "name": "L"
+        },
+        {
+          "id": 3,
+          "name": "S"
+        }
+      ],
+      "gallery": [
+        {
+          "id": 1,
+          "src": "https://product.hstatic.net/200000436739/product/5d6db5f7-0627-480b-8c20-a28fb5449baa_ac98cb7fc1ff4cad881e8301ac97e36a_master.jpeg"
+        },
+        {
+          "id": 2,
+          "src": "https://product.hstatic.net/200000436739/product/ed6caabb-0b04-48e4-8543-b2851d729769_8cbf068240584a54902a7044ef3f894b_master.jpeg"
+        },
+        {
+          "id": 3,
+          "src": "https://product.hstatic.net/200000436739/product/28deed71-c16f-431e-bbea-d97914dba463_54bf1579a753450db9f084955c740197_master.jpeg"
+        },
+        {
+          "id": 4,
+          "src": "https://product.hstatic.net/200000436739/product/upload_93bc74a376b140db8280a2f60ee5567d_master.jpg"
+        }
+      ],
+      "id": 15
+    }
+  ],
+  "orders": [
+    {
+      "id": 1,
+      "user_id": 4,
+      "create_at": "1/1/2021"
+    },
+    {
+      "id": 2,
+      "user_id": 3,
+      "create_at": "1/1/2021"
+    }
+  ],
+  "order_detail": [
+    {
+      "id": 2,
+      "order_id": 1,
+      "product_id": 12,
+      "number": 2,
+      "note": "ABCSĐSFD"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+.tr-2 {
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+  text-align: center;
+  td {
+    width: calc(90% / 8);
+    font-size: 0.9rem;
+    img {
+      width: 80%;
+    }
+  }
+}

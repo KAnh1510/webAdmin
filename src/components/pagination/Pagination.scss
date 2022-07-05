@@ -1,0 +1,39 @@
+.pagination {
+  float: right;
+  margin: 0 0 5px;
+}
+.pagination li div {
+  border: none;
+  font-size: 13px;
+  min-width: 30px;
+  min-height: 30px;
+  color: #999;
+  margin: 0 2px;
+  line-height: 30px;
+  border-radius: 2px !important;
+  text-align: center;
+  padding: 0 6px;
+}
+.pagination li div:hover {
+  cursor: pointer;
+  color: #666;
+}
+.pagination li.active div,
+.pagination li.active div.page-link {
+  background: #03a9f4;
+}
+.pagination li.active div:hover {
+  background: #0397d6;
+}
+.pagination li.disabled i {
+  color: #ccc;
+}
+.pagination li i {
+  font-size: 16px;
+  padding-top: 6px;
+}
+.hint-text {
+  float: left;
+  margin-top: 10px;
+  font-size: 13px;
+}
