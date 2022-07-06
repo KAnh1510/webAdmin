@@ -47,8 +47,8 @@ function ProductManage() {
         title="sản phẩm"
         path="product"
         totalPagesNum={totalPagesNum}
-        currentUsers={currentProducts}
-        sortedUsers={sortedProducts}
+        current={currentProducts}
+        sorted={sortedProducts}
         setCurrentPage={setCurrentPage}
       >
         <table className={cx("table")}>

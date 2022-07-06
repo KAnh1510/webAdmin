@@ -15,8 +15,8 @@ function Table({
   path,
   totalPagesNum,
   setCurrentPage,
-  currentUsers,
-  sortedUsers,
+  current,
+  sorted,
 }) {
   return (
     <div className={cx("container")}>
@@ -39,8 +39,8 @@ function Table({
           <Pagination
             pages={totalPagesNum}
             setCurrentPage={setCurrentPage}
-            currentUsers={currentUsers}
-            sortedUsers={sortedUsers}
+            current={current}
+            sorted={sorted}
           />
         </div>
       </div>

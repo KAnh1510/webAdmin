@@ -42,8 +42,8 @@ function UserManage() {
         title="người dùng"
         path="user"
         totalPagesNum={totalPagesNum}
-        currentUsers={currentUsers}
-        sortedUsers={sortedUsers}
+        current={currentUsers}
+        sorted={sortedUsers}
         setCurrentPage={setCurrentPage}
       >
         <table className={cx("table")}>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./Pagination.scss";
 
-const Pagination = ({ pages, setCurrentPage, currentUsers, sortedUsers }) => {
+const Pagination = ({ pages, setCurrentPage, current, sorted }) => {
   const numOfPages = [];
 
   for (let i = 1; i <= pages; i++) {
@@ -17,8 +17,7 @@ const Pagination = ({ pages, setCurrentPage, currentUsers, sortedUsers }) => {
   return (
     <div className="clearfix">
       <div className="hint-text">
-        Showing <b>{currentUsers.length}</b> out of <b>{sortedUsers.length}</b>{" "}
-        entries
+        Showing <b>{current.length}</b> out of <b>{sorted.length}</b> entries
       </div>
       <ul className="pagination">
         <li

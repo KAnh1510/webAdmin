@@ -4,19 +4,33 @@ import Header from "../Header";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { updateProduct } from "~/pages/ProductManage/ProductSlice";
+import { getAllCollections } from "~/pages/CollectionManage/CollectionSlice";
 
 export default function EditProduct() {
   const params = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [color, setColor] = useState();
   const productEdit = useSelector((state) => state.products.values);
+  const collectionList = useSelector((state) => state.collections.values);
 
   const productFilter = productEdit.filter(
     (item) => item.id === parseInt(params.id, 10)
   );
 
   const [values, setValues] = useState(...productFilter);
+
+  useEffect(() => {
+    dispatch(getAllCollections());
+  }, []);
+
+  let type = "";
+  let collectionTitle = [];
+  collectionList.forEach((collection) => {
+    if (collection.id === values.collection_id) {
+      type = collection.title;
+    }
+    collectionTitle.push(collection.title);
+  });
 
   const handleEditProduct = (e) => {
     e.preventDefault();
@@ -26,12 +40,13 @@ export default function EditProduct() {
         data: {
           name: values.name,
           subtle: values.subtle,
-          type: values.type,
+          collection_id: values.collection_id,
           prices: values.prices,
           imgFront: values.imgFront,
           imgBack: values.imgBack,
           size: values.size,
-          desc: values.desc,
+          color: values.color,
+          gallery: values.gallery,
         },
       })
     );
@@ -75,17 +90,27 @@ export default function EditProduct() {
             <div className="col l-3">
               <Form.Group>
                 <Form.Label htmlFor="type">Danh mục: </Form.Label>
+
                 <Form.Control
-                  type="text"
-                  id="type"
-                  name="type"
-                  value={values.type}
+                  as="select"
+                  values={type}
                   onChange={(e) => {
-                    setValues({ ...values, type: e.target.value });
+                    collectionList.forEach((collection) => {
+                      if (collection.title === e.target.value) {
+                        setValues({ ...values, collection_id: collection.id });
+                      }
+                    });
                   }}
-                />
+                >
+                  {collectionTitle.map((item, index) => (
+                    <option key={index} value={item}>
+                      {item}
+                    </option>
+                  ))}
+                </Form.Control>
               </Form.Group>
             </div>
+
             <div className="col l-3">
               <Form.Group>
                 <Form.Label htmlFor="imgFront">Giá: </Form.Label>
@@ -130,7 +155,7 @@ export default function EditProduct() {
               </div>
             </div>
             <div className="col l-4">
-              {/* <Form.Group>
+              <Form.Group>
                 <Form.Label htmlFor="imgFront">Màu: </Form.Label>
                 <ul
                   style={{ display: "flex", justifyContent: "space-between" }}
@@ -144,16 +169,15 @@ export default function EditProduct() {
                           onChange={(e) => {
                             setValues({
                               ...values,
-                              colorItem: e.target.value,
+                              color: e.target.value,
                             });
-                            setColor(e.target.value);
                           }}
                         />
                       </li>
                     );
                   })}
                 </ul>
-              </Form.Group> */}
+              </Form.Group>
             </div>
           </div>
 
@@ -182,7 +206,7 @@ export default function EditProduct() {
               </div>
             </div>
             <div className="col l-4">
-              {/* <Form.Group>
+              <Form.Group>
                 <Form.Label htmlFor="imgFront">Size: </Form.Label>
                 {values.size.map((item, index) => (
                   <Form.Control
@@ -197,23 +221,36 @@ export default function EditProduct() {
                     }}
                   />
                 ))}
-              </Form.Group> */}
+              </Form.Group>
             </div>
           </div>
 
-          <div className="col l-6">
+          <div>
             <Form.Group>
-              <Form.Label htmlFor="desc">Mô tả: </Form.Label>
-              <Form.Control
-                as="textarea"
-                rows="5"
-                id="desc"
-                name="desc"
-                value={values.desc}
-                onChange={(e) => {
-                  setValues({ ...values, desc: e.target.value });
-                }}
-              />
+              <Form.Label htmlFor="gallery">Mô tả: </Form.Label>
+              {values.gallery.map((item) => (
+                <div key={item.id} className="row mb-4">
+                  <div className="col l-6 mb-4">
+                    <Form.Control
+                      id="gallery"
+                      name="gallery"
+                      value={item.src}
+                      onChange={(e) => {
+                        setValues({ ...values, src: e.target.value });
+                      }}
+                    />
+                  </div>
+                  <div className="col l-2">
+                    <div style={{ width: "100%", border: "1px solid #ccc" }}>
+                      <img
+                        style={{ width: "100%" }}
+                        src={item.src}
+                        alt="imgFront"
+                      />
+                    </div>
+                  </div>
+                </div>
+              ))}
             </Form.Group>
           </div>
 

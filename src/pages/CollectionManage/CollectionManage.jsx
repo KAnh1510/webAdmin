@@ -46,8 +46,8 @@ function CollectionManage() {
       <Table
         title="danh mục"
         totalPagesNum={totalPagesNum}
-        currentUsers={currentCollections}
-        sortedUsers={sortedCollections}
+        current={currentCollections}
+        sorted={sortedCollections}
         setCurrentPage={setCurrentPage}
       >
         <table className={cx("table")} style={{ textAlign: "center" }}>

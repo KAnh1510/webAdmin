@@ -35,8 +35,8 @@ function OrderManage() {
       <Header title="Quản lý đơn hàng" />
       <Table
         totalPagesNum={totalPagesNum}
-        currentUsers={currentOrders}
-        sortedUsers={sortedOrders}
+        current={currentOrders}
+        sorted={sortedOrders}
         setCurrentPage={setCurrentPage}
       >
         <table className={cx("table")}>
