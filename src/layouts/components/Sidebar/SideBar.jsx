@@ -30,12 +30,12 @@ const SIDEBAR_MENU = [
   },
   {
     title: "Thống kê",
-    link: "/",
+    link: "/statistical",
     icon: "bar-chart-outline",
   },
   {
     title: "Đăng xuất",
-    link: "/login",
+    link: "/",
     icon: "log-out-outline",
   },
 ];

@@ -5,7 +5,6 @@ import OrderManage from "../pages/OrderManage";
 import Statistical from "~/pages/Statistical";
 
 const publicRoutes = [
-  { path: "/", component: Statistical },
   { path: "/users", component: UserManage },
   {
     path: "/collections",

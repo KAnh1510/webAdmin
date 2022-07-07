@@ -5,6 +5,7 @@ import AddUser from "./components/Add/AddUser";
 import EditProduct from "./components/Edit/EditProduct";
 import EditUser from "./components/Edit/EditUser";
 import DefaultLayout from "./layouts/DefaultLayout";
+import Login from "./pages/Login/Login";
 import OrderDetail from "./pages/OrderManage/OrderDetail";
 import ProductDetail from "./pages/ProductManage/ProductDetail";
 import { publicRoutes } from "./routes";
@@ -14,6 +15,12 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Routes>
+          <Route
+            path="/"
+            element={<Login />}
+          />
+
+
           {publicRoutes.map((route, index) => {
             let Page = route.component;
             let Layout = DefaultLayout;
