@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import styles from "./SideBar.module.scss";
 import classnames from "classnames/bind";
 import { NavLink } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { getAllProducts } from "~/pages/ProductManage/ProductSlice";
 
 const cx = classnames.bind(styles);
 
@@ -81,7 +79,5 @@ function SideBar() {
     </div>
   );
 }
-
-SideBar.propTypes = {};
 
 export default SideBar;

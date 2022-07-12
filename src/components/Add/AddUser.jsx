@@ -68,13 +68,12 @@ function AddUser() {
     selectedDistrict,
     selectedWard,
   } = state;
-  // console.log(selectedCity);
 
   return (
     <>
       <Header title="Quản lý người dùng" />
       <div className="table-wrapper">
-        <Form>
+        <Form onClick={() => handleAddUser()}>
           <div className="row mb-4">
             <div className="col l-6">
               <Form.Group>
@@ -251,11 +250,7 @@ function AddUser() {
           </div>
 
           <div className="row mb-4" style={{ justifyContent: "flex-end" }}>
-            <button
-              type="submit"
-              className="btn btn-primary btn-block col l-2"
-              onClick={handleAddUser}
-            >
+            <button type="submit" className="btn btn-primary btn-block col l-2">
               Add User
             </button>
           </div>

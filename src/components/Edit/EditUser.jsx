@@ -6,7 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import useLocationForm from "~/hook/useLocationForm";
 import Header from "../Header";
-import { getAllUsers, getUser, updateUser } from "~/pages/UserManage/UserSlice";
+import { getAllUsers, updateUser } from "~/pages/UserManage/UserSlice";
 
 const EditUser = () => {
   const params = useParams();

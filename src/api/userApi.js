@@ -2,6 +2,11 @@
 import axiosClient from "./axiosClient";
 
 const usersApi = {
+  create: (data) => {
+    const url = `/users`;
+    return axiosClient.post(url, data);
+  },
+
   getAll: (params) => {
     const url = "/users";
     return axiosClient.get(url, { params });
