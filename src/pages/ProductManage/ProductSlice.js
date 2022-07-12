@@ -43,17 +43,32 @@ export const productSlice = createSlice({
 });
 
 export const createProduct = createAsyncThunk(
-  "products/create",
-  async ({ name, subtle, type, prices, imgFront, imgBack, desc }) => {
+  "product",
+  async ({
+    id,
+    name,
+    subtle,
+    prices,
+    imgFront,
+    imgBack,
+    collection_id,
+    size,
+    color,
+    gallery,
+  }) => {
     const res = await productApi.create({
+      id,
       name,
       subtle,
-      type,
       prices,
       imgFront,
       imgBack,
-      desc,
+      collection_id,
+      size,
+      color,
+      gallery,
     });
+    console.log(res.data);
     return res.data;
   }
 );

@@ -52,30 +52,15 @@ export const UserSlice = createSlice({
 });
 
 export const createUser = createAsyncThunk(
-  "usersApi/create",
+  "users",
   async ({
-    name,
-    subtle,
-    type,
-    prices,
-    color,
-    size,
-    imgFront,
-    imgBack,
-    desc,
+    id, name, email, address, phoneNumber, birthday, role, gender, password
   }) => {
     const res = await usersApi.create({
-      name,
-      subtle,
-      type,
-      prices,
-      color,
-      size,
-      imgFront,
-      imgBack,
-      desc,
+      id, name, email, address, phoneNumber, birthday, role, gender, password
     });
-    return res.data;
+    console.log(res);
+    return res;
   }
 );
 

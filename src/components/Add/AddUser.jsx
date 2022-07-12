@@ -5,8 +5,8 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 
 import Datepicker from "react-datepicker";
-import { parseISO } from "date-fns";
-import { add, format } from "date-fns/esm";
+// import { parseISO } from "date-fns";
+// import { add, format } from "date-fns/esm";
 import "react-datepicker/dist/react-datepicker.css";
 import { v4 as uuidv4 } from "uuid";
 
@@ -32,20 +32,12 @@ function AddUser() {
   const dispatch = useDispatch();
 
   const handleAddUser = (e) => {
-    setValues({
-      name: "",
-      email: "",
-      address: "",
-      password: "",
-      phoneNumber: "",
-      birthday: today,
-    });
     e.preventDefault();
     dispatch(
       createUser({
         id: uuidv4(),
         name: values.name,
-        email: values.email,
+        email: values.email ,
         address: values.address,
         phoneNumber: values.phoneNumber,
         birthday: values.birthday,

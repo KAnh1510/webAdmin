@@ -19,6 +19,7 @@ function ProductManage() {
   const collectionList = useSelector((state) => state.collections.values);
 
   const products = [...productList];
+  console.log(productList);
   const [currentPage, setCurrentPage] = useState(1);
   const [ProductsPerPage] = useState(3);
   const sortedProducts = products.sort((a, b) => (a.name < b.name ? -1 : 1));
@@ -47,7 +48,7 @@ function ProductManage() {
         title="sản phẩm"
         path="product"
         totalPagesNum={totalPagesNum}
-        current={currentProducts}
+        current={productList}
         sorted={sortedProducts}
         setCurrentPage={setCurrentPage}
       >
@@ -67,7 +68,7 @@ function ProductManage() {
             </tr>
           </thead>
           <tbody>
-            {currentProducts.map((product, index) => {
+            {productList.map((product, index) => {
               const { name, prices, subtle, imgFront, imgBack, color, size } =
                 product;
               let type = "";
@@ -85,7 +86,8 @@ function ProductManage() {
                   <td>{subtle}</td>
                   <td>{prices}</td>
                   <td>
-                    {color.map((item, index) => (
+                    {color ? (
+                      color.map((item, index) => (
                       <p
                         key={index}
                         style={{
@@ -97,12 +99,13 @@ function ProductManage() {
                           border: "1px solid #000",
                         }}
                       ></p>
-                    ))}
+                    ))
+                    ) : ""}
                   </td>
                   <td>
-                    {size.map((item, index) => (
+                    {size ? (size.map((item, index) => (
                       <div key={index}>{item.name}</div>
-                    ))}
+                    ))) : ""}
                   </td>
                   <td>
                     <img src={imgFront} alt="front" />
