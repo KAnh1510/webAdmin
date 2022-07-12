@@ -5,7 +5,7 @@ import Header from "../../components/Header";
 import Table from "../../components/Table";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllCollections } from "./CollectionSlice";
+import { deleteCollection, getAllCollections } from "./CollectionSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 
@@ -38,7 +38,9 @@ function CollectionManage() {
     sortedCollections.length / CollectionsPerPage
   );
 
-  const handleRemoveCollection = () => {};
+  const handleRemoveCollection = (id) => {
+    dispatch(deleteCollection({ id: id }));
+  };
 
   return (
     <div>

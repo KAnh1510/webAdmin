@@ -1,7 +1,9 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import AddCollection from "./components/Add/AddCollection";
 import AddProduct from "./components/Add/AddProduct";
 import AddUser from "./components/Add/AddUser";
+import EditCollection from "./components/Edit/EditCollection";
 import EditProduct from "./components/Edit/EditProduct";
 import EditUser from "./components/Edit/EditUser";
 import DefaultLayout from "./layouts/DefaultLayout";
@@ -15,11 +17,7 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Routes>
-          <Route
-            path="/"
-            element={<Login />}
-          />
-
+          <Route path="/" element={<Login />} />
 
           {publicRoutes.map((route, index) => {
             let Page = route.component;
@@ -82,6 +80,22 @@ function App() {
             element={
               <DefaultLayout>
                 <OrderDetail />
+              </DefaultLayout>
+            }
+          />
+          <Route
+            path="collections/add-undefined"
+            element={
+              <DefaultLayout>
+                <AddCollection />
+              </DefaultLayout>
+            }
+          />
+          <Route
+            path="collections/edit-collection/:id"
+            element={
+              <DefaultLayout>
+                <EditCollection />
               </DefaultLayout>
             }
           />
