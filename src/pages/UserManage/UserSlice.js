@@ -27,12 +27,11 @@ export const UserSlice = createSlice({
         state.values = action.payload;
       })
 
-      .addCase(createUser.fulfilled, (state, action) => {
+      .addCase(registerUser.fulfilled, (state, action) => {
         state.values.push(action.payload);
       })
 
       .addCase(updateUser.fulfilled, (state, action) => {
-        // const existingUser = state.values.find((usersApi => usersApi === id);
         action.payload = state.values.find(
           (user) => user === action.payload.id
         );
@@ -43,16 +42,12 @@ export const UserSlice = createSlice({
           ({ id }) => id === action.payload.id
         );
         state.values.splice(index, 1);
-      })
-
-      .addCase(findUsersByName.fulfilled, (state, action) => {
-        state.values = [...action.payload];
       });
   },
 });
 
-export const createUser = createAsyncThunk(
-  "usersApi/create",
+export const registerUser = createAsyncThunk(
+  "usersApi/register",
   async ({
     name,
     email,
@@ -62,8 +57,10 @@ export const createUser = createAsyncThunk(
     role,
     gender,
     password,
+    create_at,
+    status,
   }) => {
-    const res = await usersApi.create({
+    const res = await usersApi.register({
       name,
       email,
       address,
@@ -72,8 +69,10 @@ export const createUser = createAsyncThunk(
       role,
       gender,
       password,
+      create_at,
+      status,
     });
-    return res.data;
+    return res;
   }
 );
 
@@ -99,18 +98,5 @@ export const deleteUser = createAsyncThunk("users/delete", async ({ id }) => {
   await usersApi.delete(id);
   return { id };
 });
-
-export const deleteAllUsers = createAsyncThunk("users/deleteAll", async () => {
-  const res = await usersApi.deleteAll();
-  return res.data;
-});
-
-export const findUsersByName = createAsyncThunk(
-  "users/findByName",
-  async ({ name }) => {
-    const res = await usersApi.findByTitle(name);
-    return res.data;
-  }
-);
 
 export default UserSlice;

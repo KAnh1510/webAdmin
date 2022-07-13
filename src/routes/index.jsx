@@ -3,9 +3,10 @@ import UserManage from "../pages/UserManage/UserManage";
 import ProductManage from "../pages/ProductManage";
 import OrderManage from "../pages/OrderManage";
 import Statistical from "~/pages/Statistical";
+import Account from "~/pages/Account";
 
 const publicRoutes = [
-  { path: "/", component: Statistical },
+  { path: "/account", component: Account },
   { path: "/users", component: UserManage },
   {
     path: "/collections",

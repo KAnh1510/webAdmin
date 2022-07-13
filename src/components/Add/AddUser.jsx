@@ -5,13 +5,11 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 
 import Datepicker from "react-datepicker";
-import { parseISO } from "date-fns";
-import { add, format } from "date-fns/esm";
 import "react-datepicker/dist/react-datepicker.css";
 import { v4 as uuidv4 } from "uuid";
 
 import useLocationForm from "~/hook/useLocationForm";
-import { createUser } from "~/pages/UserManage/UserSlice";
+import { registerUser } from "../../pages/UserManage/UserSlice";
 import Header from "../Header";
 import { useNavigate } from "react-router-dom";
 
@@ -42,7 +40,7 @@ function AddUser() {
     });
     e.preventDefault();
     dispatch(
-      createUser({
+      registerUser({
         id: uuidv4(),
         name: values.name,
         email: values.email,

@@ -9,7 +9,6 @@ import { faPen, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import Table from "../../components/Table";
 
 import Header from "../../components/Header";
-import { format } from "date-fns/esm";
 import { deleteUser, getAllUsers } from "./UserSlice";
 
 const cx = classnames.bind(styles);
@@ -29,7 +28,7 @@ function UserManage() {
 
   useEffect(() => {
     dispatch(getAllUsers());
-  }, []);
+  }, [dispatch]);
 
   const handleRemoveUser = (id) => {
     dispatch(deleteUser({ id: id }));
@@ -70,6 +69,7 @@ function UserManage() {
                 birthday,
                 gender,
                 role,
+                create_at,
               } = user;
               return (
                 <tr key={index}>
@@ -79,9 +79,9 @@ function UserManage() {
                   <td>{email}</td>
                   <td>{address}</td>
                   <td>{phoneNumber}</td>
-                  <td>12/10/2022</td>
+                  <td>{birthday}</td>
                   <td>{gender}</td>
-                  <td>12/10/2022</td>
+                  <td>{create_at}</td>
                   <td>{role}</td>
                   <td>
                     <div>

@@ -1,36 +1,34 @@
-import { Form } from "react-bootstrap";
-import Select from "react-select";
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import useLocationForm from "~/hook/useLocationForm";
-import Header from "../Header";
-import { getAllUsers, updateUser } from "~/pages/UserManage/UserSlice";
+import { getAllUsers, updateUser } from "../UserManage/UserSlice";
+import { getAuthUser } from "../Login/AuthSlice";
+import Header from "~/components/Header";
+import { Form } from "react-bootstrap";
 
-const EditUser = () => {
-  const params = useParams();
+function Account() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const today = new Date();
+  const authUser = useSelector((state) => state.auth.values);
   const userList = useSelector((state) => state.users.values);
 
   useEffect(() => {
+    dispatch(getAuthUser());
     dispatch(getAllUsers());
   }, [dispatch]);
 
-  const existingUser = userList.filter(
-    (item) => item.id === parseInt(params.id, 10)
+  const currentUser = userList.filter(
+    (item) => item.id === authUser[0].user_id
   );
 
-  const [values, setValues] = useState(...existingUser);
+  console.log(authUser);
 
-  const { state, onCitySelect, onDistrictSelect, onWardSelect } =
-    useLocationForm(false);
+  const [values, setValues] = useState(...currentUser);
 
   const handleEditUser = (e) => {
     e.preventDefault();
     dispatch(
       updateUser({
-        id: params.id,
+        id: authUser[0].user_id,
         data: {
           name: values.name,
           email: values.email,
@@ -43,35 +41,29 @@ const EditUser = () => {
         },
       })
     );
-    setValues({
-      name: "",
-      email: "",
-      address: "",
-      password: "",
-      phoneNumber: "",
-      birthday: new Date(),
-    });
-    navigate("/users");
   };
 
-  const {
-    cityOptions,
-    districtOptions,
-    wardOptions,
-    selectedCity,
-    selectedDistrict,
-    selectedWard,
-  } = state;
+  const handleDeleteUser = (e) => {
+    e.preventDefault();
+    dispatch(
+      updateUser({
+        id: authUser[0].user_id,
+        data: {
+          status: "Delete",
+        },
+      })
+    );
+  };
 
   return (
-    <>
-      <Header title="Quản lý người dùng" />
-      <div className="table-wrapper">
+    <div>
+      <Header title="Thông tin của bạn"></Header>
+      <div style={{ padding: " 15px" }}>
         <Form>
           <div className="row mb-4">
             <div className="col l-6">
               <Form.Group>
-                <Form.Label htmlFor="fullName">Full name</Form.Label>
+                <Form.Label htmlFor="fullName">Họ và tên:</Form.Label>
                 <Form.Control
                   type="text"
                   id="fullName"
@@ -102,7 +94,7 @@ const EditUser = () => {
             </div>
             <div className="col l-6">
               <Form.Group>
-                <Form.Label htmlFor="phoneNumber">Phone</Form.Label>
+                <Form.Label htmlFor="phoneNumber">Số điện thoại</Form.Label>
                 <Form.Control
                   type="text"
                   id="phoneNumber"
@@ -119,39 +111,7 @@ const EditUser = () => {
           <div className="row mb-4">
             <div className="col l-6">
               <Form.Group>
-                <Form.Label htmlFor="address">Address</Form.Label>
-                <Select
-                  name="cityId"
-                  key={`cityId_${selectedCity?.value}`}
-                  className="mb-4"
-                  isDisabled={cityOptions.length === 0}
-                  options={cityOptions}
-                  onChange={(option) => onCitySelect(option)}
-                  placeholder="Tỉnh/Thành"
-                  defaultValue={selectedCity}
-                />
-
-                <Select
-                  name="districtId"
-                  key={`districtId_${selectedDistrict?.value}`}
-                  isDisabled={districtOptions.length === 0}
-                  options={districtOptions}
-                  className="mb-4"
-                  onChange={(option) => onDistrictSelect(option)}
-                  placeholder="Quận/Huyện"
-                  defaultValue={selectedDistrict}
-                />
-
-                <Select
-                  name="wardId"
-                  key={`wardId_${selectedWard?.value}`}
-                  isDisabled={wardOptions.length === 0}
-                  options={wardOptions}
-                  className="mb-4"
-                  placeholder="Phường/Xã"
-                  onChange={(option) => onWardSelect(option)}
-                  defaultValue={selectedWard}
-                />
+                <Form.Label htmlFor="address">Địa chỉ:</Form.Label>
                 <Form.Control
                   type="text"
                   id="address"
@@ -164,52 +124,47 @@ const EditUser = () => {
                 />
               </Form.Group>
             </div>
-            {/* <div className="col l-6">
-              <Form.Group className="form-outline">
-                <Form.Label htmlFor="birthday">Birthday</Form.Label>
-                <Datepicker
-                  selected={values.birthday}
-                  className="form-control"
-                  custom="true"
-                  placeholder={values.birthday}
+            <div className="col l-6">
+              <Form.Group>
+                <Form.Label htmlFor="address">Ngày sinh:</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="customer[birthday]"
+                  id="birthday"
+                  min={today}
                   value={values.birthday}
                   onChange={(e) => {
                     setValues({ ...values, birthday: e.target.value });
                   }}
+                  size="30"
                 />
               </Form.Group>
-            </div> */}
+            </div>
           </div>
 
           <div className="row mb-4">
             <div className="col l-6">
               <Form.Group>
-                <Form.Label htmlFor="gender">Gender</Form.Label>
+                <Form.Label htmlFor="gender">Giới tính</Form.Label>
                 <Form.Control
-                  as="select"
+                  type="text"
                   value={values.gender}
                   onChange={(e) => {
                     setValues({ ...values, gender: e.target.value });
                   }}
-                >
-                  <option value="Nam">Nam</option>
-                  <option value="Nữ">Nữ</option>
-                </Form.Control>
+                ></Form.Control>
               </Form.Group>
             </div>
             <div className="col l-6">
               <Form.Group>
                 <Form.Label htmlFor="role">Role</Form.Label>
                 <Form.Control
-                  as="select"
+                  type="text"
                   value={values.role}
                   onChange={(e) => {
                     setValues({ ...values, role: e.target.value });
                   }}
-                >
-                  <option value="admin">Admin</option>
-                  <option value="user">User</option>
-                </Form.Control>
+                ></Form.Control>
               </Form.Group>
             </div>
           </div>
@@ -219,6 +174,7 @@ const EditUser = () => {
               <Form.Group className="form-outline">
                 <Form.Label htmlFor="passWord">Mật khẩu</Form.Label>
                 <Form.Control
+                  readOnly
                   type="password"
                   id="passWord"
                   name="passWord"
@@ -229,33 +185,27 @@ const EditUser = () => {
                 />
               </Form.Group>
             </div>
-            <div className="col l-6">
-              <Form.Group>
-                <Form.Label htmlFor="comfirmPassWord">
-                  Nhập lại mật khẩu
-                </Form.Label>
-                <Form.Control
-                  type="password"
-                  id="confirmPassWord"
-                  name="confirmPassWord"
-                />
-              </Form.Group>
-            </div>
           </div>
-
           <div className="row mb-4" style={{ justifyContent: "flex-end" }}>
             <button
               type="submit"
               className="btn btn-primary btn-block col l-2"
               onClick={handleEditUser}
             >
-              Edit User
+              Cập nhật thông tin
+            </button>
+            <button
+              type="submit"
+              className="btn btn-primary btn-block col l-2"
+              onClick={handleDeleteUser}
+            >
+              Xóa tài khoản
             </button>
           </div>
         </Form>
       </div>
-    </>
+    </div>
   );
-};
+}
 
-export default EditUser;
+export default Account;
