@@ -9,6 +9,11 @@ const cx = classnames.bind(styles);
 
 const SIDEBAR_MENU = [
   {
+    title: "Thông tin người dùng",
+    link: "/login/info",
+    icon: "person-outline",
+  },
+  {
     title: "Quản lý người dùng",
     link: "/users",
     icon: "person-outline",

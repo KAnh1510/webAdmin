@@ -8,8 +8,10 @@ import EditProduct from "./components/Edit/EditProduct";
 import EditUser from "./components/Edit/EditUser";
 import DefaultLayout from "./layouts/DefaultLayout";
 import Login from "./pages/Login/Login";
+import LoginInfo from "./pages/Login/LoginInfo";
 import OrderDetail from "./pages/OrderManage/OrderDetail";
 import ProductDetail from "./pages/ProductManage/ProductDetail";
+import { ToastContainer } from "react-toastify";
 import { publicRoutes } from "./routes";
 
 function App() {
@@ -99,7 +101,16 @@ function App() {
               </DefaultLayout>
             }
           />
+          <Route
+            path="login/info"
+            element={
+              <DefaultLayout>
+                <LoginInfo />
+              </DefaultLayout>
+            }
+          />
         </Routes>
+        <ToastContainer />
       </div>
     </BrowserRouter>
   );
