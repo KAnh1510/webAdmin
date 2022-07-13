@@ -18,7 +18,7 @@ const LoginInfo = () => {
   useEffect(() => {
     dispatch(getAllUsers());
   }, []);
-  const existingUser = userList.filter((item) => item.id === 3);
+  const existingUser = userList.filter((item) => item.role === "admin");
 
   const [values, setValues] = useState(...existingUser);
   console.log(userList);
