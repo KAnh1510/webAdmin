@@ -1,22 +1,17 @@
-import React, { useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { deleteAuthUser, getAuthUser } from "../Login/AuthSlice";
+import { logout } from "../Login/AuthSlice";
 
 import "./Logout.scss";
 const Logout = ({ setConfirmLogout }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const currentUser = useSelector((state) => state.auth.values);
-
-  useEffect(() => {
-    dispatch(getAuthUser());
-  }, [dispatch]);
 
   const handleLogoutBtn = () => {
     navigate("/");
-    dispatch(deleteAuthUser({ id: currentUser[0].id }));
+    dispatch(logout());
   };
 
   return (

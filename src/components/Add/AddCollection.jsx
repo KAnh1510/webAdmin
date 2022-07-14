@@ -47,7 +47,7 @@ const AddCollection = () => {
             </div>
             <div className="col l-6">
               <Form.Group>
-                <Form.Label htmlFor="title">Title</Form.Label>
+                <Form.Label htmlFor="title">Tên danh mục: </Form.Label>
                 <Form.Control
                   type="text"
                   id="title"
@@ -66,7 +66,7 @@ const AddCollection = () => {
               className="btn btn-primary btn-block col l-2"
               onClick={handleAddCollection}
             >
-              Add Collection
+              Thêm danh mục
             </button>
           </div>
         </Form>

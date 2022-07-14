@@ -1,11 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import usersApi from "~/api/userApi";
+import StorageKeys from "~/constant/storage-keys";
 
 export const UserSlice = createSlice({
   name: "users",
   initialState: {
     loading: false,
     values: [],
+    current: JSON.parse(localStorage.getItem(StorageKeys.USER)) || {},
   },
 
   reducers: {},

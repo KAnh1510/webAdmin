@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteCollection, getAllCollections } from "./CollectionSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { getAllProducts } from "../ProductManage/ProductSlice";
 
 const cx = classnames.bind(styles);
 
@@ -18,8 +19,8 @@ function CollectionManage() {
 
   useEffect(() => {
     dispatch(getAllCollections());
-    dispatch(getAllCollections());
-  }, []);
+    dispatch(getAllProducts());
+  }, [dispatch]);
 
   const collections = [...collectionList];
   const [currentPage, setCurrentPage] = useState(1);
@@ -63,7 +64,7 @@ function CollectionManage() {
             </tr>
           </thead>
           <tbody>
-            {collectionList.map((collection) => {
+            {currentCollections.map((collection) => {
               let count = 0;
               return (
                 <tr key={collection.id}>

@@ -1,26 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers, updateUser } from "../UserManage/UserSlice";
-import { getAuthUser } from "../Login/AuthSlice";
 import Header from "~/components/Header";
 import { Form } from "react-bootstrap";
 
 function Account() {
   const dispatch = useDispatch();
   const today = new Date();
-  const authUser = useSelector((state) => state.auth.values);
   const userList = useSelector((state) => state.users.values);
+  const authUser = JSON.parse(localStorage.getItem("currentAdmin"));
 
   useEffect(() => {
-    dispatch(getAuthUser());
     dispatch(getAllUsers());
-  }, [dispatch]);
+  }, []);
 
   const currentUser = userList.filter(
-    (item) => item.id === authUser[0].user_id
+    (item) => parseInt(item.id) === authUser.user_id
   );
-
-  console.log(authUser);
 
   const [values, setValues] = useState(...currentUser);
 
@@ -28,7 +24,7 @@ function Account() {
     e.preventDefault();
     dispatch(
       updateUser({
-        id: authUser[0].user_id,
+        id: authUser.user_id,
         data: {
           name: values.name,
           email: values.email,

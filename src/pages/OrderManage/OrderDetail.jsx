@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styles from "./Order.module.scss";
 import classnames from "classnames/bind";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -7,11 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 
 import Header from "../../components/Header";
-import {
-  deleteOrderDetail,
-  getAllOrderDetail,
-  getOrderDetail,
-} from "./OrderDetailSlice";
+import { deleteOrderDetail, getAllOrderDetail } from "./OrderDetailSlice";
 import { getAllProducts } from "../ProductManage/ProductSlice";
 
 const cx = classnames.bind(styles);
@@ -29,7 +25,7 @@ function OrderDetail() {
   useEffect(() => {
     dispatch(getAllOrderDetail());
     dispatch(getAllProducts());
-  }, []);
+  }, [dispatch]);
 
   const handleRemoveProduct = () => {
     dispatch(deleteOrderDetail({ id: params.id }));

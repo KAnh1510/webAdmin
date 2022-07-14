@@ -12,18 +12,19 @@ const Login = () => {
 
   const userList = useSelector((state) => state.users.values);
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     if (currentUser.length > 0) {
-      navigate("/account");
-      dispatch(
+      await dispatch(
         loginUser({
           user_id: currentUser[0].id,
           role: "user",
           email: values.email,
           password: values.password,
+          login_at: new Date().toLocaleString(),
         })
       );
+      navigate("/account");
     } else setErrMes(true);
   };
 

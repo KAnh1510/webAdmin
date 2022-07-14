@@ -23,14 +23,6 @@ const productApi = {
   delete: (id) => {
     return axiosClient.delete(`/product/${id}`);
   },
-
-  deleteAll: () => {
-    return axiosClient.delete(`/product`);
-  },
-
-  findByName: (name) => {
-    return axiosClient.get(`/product?name=${name}`);
-  },
 };
 
 export default productApi;

@@ -9,7 +9,7 @@ import { faPen, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import Table from "../../components/Table";
 
 import Header from "../../components/Header";
-import { deleteProduct, getAllProducts, getProduct } from "./ProductSlice";
+import { deleteProduct, getAllProducts } from "./ProductSlice";
 import { getAllCollections } from "../CollectionManage/CollectionSlice";
 
 const cx = classnames.bind(styles);
@@ -19,7 +19,6 @@ function ProductManage() {
   const collectionList = useSelector((state) => state.collections.values);
 
   const products = [...productList];
-  console.log(productList);
   const [currentPage, setCurrentPage] = useState(1);
   const [ProductsPerPage] = useState(3);
   const sortedProducts = products.sort((a, b) => (a.name < b.name ? -1 : 1));
@@ -35,7 +34,7 @@ function ProductManage() {
   useEffect(() => {
     dispatch(getAllProducts());
     dispatch(getAllCollections());
-  }, []);
+  }, [dispatch]);
 
   const handleRemoveProduct = (id) => {
     dispatch(deleteProduct({ id: id }));
@@ -48,7 +47,7 @@ function ProductManage() {
         title="sản phẩm"
         path="product"
         totalPagesNum={totalPagesNum}
-        current={productList}
+        current={currentProducts}
         sorted={sortedProducts}
         setCurrentPage={setCurrentPage}
       >
@@ -68,7 +67,7 @@ function ProductManage() {
             </tr>
           </thead>
           <tbody>
-            {productList.map((product, index) => {
+            {currentProducts.map((product, index) => {
               const { name, prices, subtle, imgFront, imgBack, color, size } =
                 product;
               let type = "";
@@ -86,26 +85,28 @@ function ProductManage() {
                   <td>{subtle}</td>
                   <td>{prices}</td>
                   <td>
-                    {color ? (
-                      color.map((item, index) => (
-                      <p
-                        key={index}
-                        style={{
-                          backgroundColor: item.idColor,
-                          marginBottom: "6px",
-                          padding: "10px",
-                          width: "20px",
-                          borderRadius: "50%",
-                          border: "1px solid #000",
-                        }}
-                      ></p>
-                    ))
-                    ) : ""}
+                    {color
+                      ? color.map((item, index) => (
+                          <p
+                            key={index}
+                            style={{
+                              backgroundColor: item.idColor,
+                              marginBottom: "6px",
+                              padding: "10px",
+                              width: "20px",
+                              borderRadius: "50%",
+                              border: "1px solid #000",
+                            }}
+                          ></p>
+                        ))
+                      : ""}
                   </td>
                   <td>
-                    {size ? (size.map((item, index) => (
-                      <div key={index}>{item.name}</div>
-                    ))) : ""}
+                    {size
+                      ? size.map((item, index) => (
+                          <div key={index}>{item.name}</div>
+                        ))
+                      : ""}
                   </td>
                   <td>
                     <img src={imgFront} alt="front" />

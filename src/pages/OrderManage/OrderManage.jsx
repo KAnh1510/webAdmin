@@ -17,7 +17,7 @@ function OrderManage() {
 
   const orders = [...ordersList];
   const [currentPage, setCurrentPage] = useState(1);
-  const [OrdersPerPage] = useState(3);
+  const [OrdersPerPage] = useState(7);
   const sortedOrders = orders.sort((a, b) => (a.name < b.name ? -1 : 1));
 
   const indexOfLastOrder = currentPage * OrdersPerPage;
@@ -28,7 +28,7 @@ function OrderManage() {
   useEffect(() => {
     dispatch(getAllOrders());
     dispatch(getAllUsers());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div>

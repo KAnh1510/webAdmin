@@ -16,12 +16,11 @@ const EditCollection = () => {
 
   useEffect(() => {
     dispatch(getAllCollections());
-  }, []);
+  }, [dispatch]);
 
   const collectionListFilter = collectionList.filter(
     (item) => item.id === parseInt(params.id, 10)
   );
-  console.log(collectionListFilter);
 
   const [values, setValues] = useState(...collectionListFilter);
 

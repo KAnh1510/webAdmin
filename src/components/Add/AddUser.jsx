@@ -15,7 +15,8 @@ import { useNavigate } from "react-router-dom";
 
 function AddUser() {
   const navigate = useNavigate();
-  const today = new Date();
+  const [startDate, setDate] = useState("");
+  const today = new Date().toLocaleDateString();
   const [values, setValues] = useState({
     name: "",
     email: "",
@@ -47,18 +48,6 @@ function AddUser() {
     navigate("/users");
   };
 
-  const { state, onCitySelect, onDistrictSelect, onWardSelect } =
-    useLocationForm(false);
-
-  const {
-    cityOptions,
-    districtOptions,
-    wardOptions,
-    selectedCity,
-    selectedDistrict,
-    selectedWard,
-  } = state;
-
   return (
     <>
       <Header title="Quản lý người dùng" />
@@ -67,7 +56,7 @@ function AddUser() {
           <div className="row mb-4">
             <div className="col l-6">
               <Form.Group>
-                <Form.Label htmlFor="fullName">Full name</Form.Label>
+                <Form.Label htmlFor="fullName">Họ và tên: </Form.Label>
                 <Form.Control
                   type="text"
                   id="fullName"
@@ -98,7 +87,7 @@ function AddUser() {
             </div>
             <div className="col l-6">
               <Form.Group>
-                <Form.Label htmlFor="phoneNumber">Phone</Form.Label>
+                <Form.Label htmlFor="phoneNumber">Số điện thoại: </Form.Label>
                 <Form.Control
                   type="text"
                   id="phoneNumber"
@@ -115,39 +104,7 @@ function AddUser() {
           <div className="row mb-4">
             <div className="col l-6">
               <Form.Group>
-                <Form.Label htmlFor="address">Address</Form.Label>
-                <Select
-                  name="cityId"
-                  key={`cityId_${selectedCity?.value}`}
-                  className="mb-4"
-                  isDisabled={cityOptions.length === 0}
-                  options={cityOptions}
-                  onChange={(option) => onCitySelect(option)}
-                  placeholder="Tỉnh/Thành"
-                  defaultValue={selectedCity}
-                />
-
-                <Select
-                  name="districtId"
-                  key={`districtId_${selectedDistrict?.value}`}
-                  isDisabled={districtOptions.length === 0}
-                  options={districtOptions}
-                  className="mb-4"
-                  onChange={(option) => onDistrictSelect(option)}
-                  placeholder="Quận/Huyện"
-                  defaultValue={selectedDistrict}
-                />
-
-                <Select
-                  name="wardId"
-                  key={`wardId_${selectedWard?.value}`}
-                  isDisabled={wardOptions.length === 0}
-                  options={wardOptions}
-                  className="mb-4"
-                  placeholder="Phường/Xã"
-                  onChange={(option) => onWardSelect(option)}
-                  defaultValue={selectedWard}
-                />
+                <Form.Label htmlFor="address">Địa chỉ: </Form.Label>
                 <Form.Control
                   type="text"
                   id="address"
@@ -162,16 +119,19 @@ function AddUser() {
             </div>
             <div className="col l-6">
               <Form.Group className="form-outline">
-                <Form.Label htmlFor="birthday">Birthday</Form.Label>
-                <Datepicker
-                  selected={values.birthday}
-                  className="form-control"
-                  custom="true"
-                  placeholder={values.birthday}
-                  value={values.birthday}
+                <Form.Label htmlFor="birthday">Ngày sinh: </Form.Label>
+                <Form.Control
+                  type="date"
+                  placeholder="mm/dd/yyyy"
+                  name="customer[birthday]"
+                  id="birthday"
+                  min={today}
+                  value={startDate}
                   onChange={(e) => {
+                    setDate(e.target.value);
                     setValues({ ...values, birthday: e.target.value });
                   }}
+                  size="30"
                 />
               </Form.Group>
             </div>
@@ -180,7 +140,7 @@ function AddUser() {
           <div className="row mb-4">
             <div className="col l-6">
               <Form.Group>
-                <Form.Label htmlFor="gender">Gender</Form.Label>
+                <Form.Label htmlFor="gender">Giới tính:</Form.Label>
                 <Form.Control
                   as="select"
                   value={values.gender}
@@ -241,7 +201,7 @@ function AddUser() {
 
           <div className="row mb-4" style={{ justifyContent: "flex-end" }}>
             <button type="submit" className="btn btn-primary btn-block col l-2">
-              Add User
+              Thêm người dùng
             </button>
           </div>
         </Form>
