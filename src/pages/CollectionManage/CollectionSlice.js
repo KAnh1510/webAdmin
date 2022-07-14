@@ -44,11 +44,12 @@ export const CollectionSlice = createSlice({
 
 export const createCollection = createAsyncThunk(
   "collections/create",
-  async ({ title }) => {
+  async ({ id, title }) => {
     const res = await collectionApi.create({
+      id,
       title,
     });
-    return res.data;
+    return res;
   }
 );
 export const getAllCollections = createAsyncThunk(

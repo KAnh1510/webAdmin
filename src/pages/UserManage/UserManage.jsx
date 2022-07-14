@@ -15,6 +15,7 @@ const cx = classnames.bind(styles);
 function UserManage() {
   const dispatch = useDispatch();
   const userList = useSelector((state) => state.users.values);
+  console.log(userList);
 
   const users = [...userList];
   const [currentPage, setCurrentPage] = useState(1);
@@ -23,7 +24,7 @@ function UserManage() {
 
   const indexOfLastUser = currentPage * UsersPerPage;
   const indexOfFirstUser = indexOfLastUser - UsersPerPage;
-  const currentUsers = sortedUsers.slice(indexOfFirstUser, indexOfLastUser);
+  // const currentUsers = sortedUsers.slice(indexOfFirstUser, indexOfLastUser);
   const totalPagesNum = Math.ceil(sortedUsers.length / UsersPerPage);
 
   useEffect(() => {
@@ -41,7 +42,7 @@ function UserManage() {
         title="người dùng"
         path="user"
         totalPagesNum={totalPagesNum}
-        current={currentUsers}
+        current={userList}
         sorted={sortedUsers}
         setCurrentPage={setCurrentPage}
       >
@@ -60,7 +61,7 @@ function UserManage() {
             </tr>
           </thead>
           <tbody>
-            {currentUsers.map((user, index) => {
+            {users.map((user, index) => {
               const {
                 name,
                 address,
@@ -71,16 +72,17 @@ function UserManage() {
                 role,
                 create_at,
               } = user;
+
               return (
                 <tr key={index}>
                   <td>
-                    <Link to="/">{name}</Link>
+                    <Link to="/">{name ? name : ""}</Link>
                   </td>
-                  <td>{email}</td>
-                  <td>{address}</td>
-                  <td>{phoneNumber}</td>
-                  <td>{birthday}</td>
-                  <td>{gender}</td>
+                  <td>{email ? email : ""}</td>
+                  <td>{address ? address : ""}</td>
+                  <td>{phoneNumber ? phoneNumber : ""}</td>
+                  <td>{birthday ? birthday : " "}</td>
+                  <td>{gender ? gender : ""}</td>
                   <td>{create_at}</td>
                   <td>{role}</td>
                   <td>

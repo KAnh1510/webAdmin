@@ -13,8 +13,7 @@ const productApi = {
   },
 
   create: (data) => {
-    const url = `/product`;
-    return axiosClient.post(url, data);
+    return axiosClient.post("/product", data);
   },
 
   update: (id, data) => {

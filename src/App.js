@@ -1,14 +1,18 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import AddCollection from "./components/Add/AddCollection";
 import AddProduct from "./components/Add/AddProduct";
 import AddUser from "./components/Add/AddUser";
+import EditCollection from "./components/Edit/EditCollection";
 import EditProduct from "./components/Edit/EditProduct";
 import EditUser from "./components/Edit/EditUser";
 import DefaultLayout from "./layouts/DefaultLayout";
 import Login from "./pages/Login/Login";
+import LoginInfo from "./pages/Login/LoginInfo";
 import OrderDetail from "./pages/OrderManage/OrderDetail";
 import ProductDetail from "./pages/ProductManage/ProductDetail";
 import Register from "./pages/Register";
+import { ToastContainer } from "react-toastify";
 import { publicRoutes } from "./routes";
 
 function App() {
@@ -84,7 +88,32 @@ function App() {
               </DefaultLayout>
             }
           />
+          <Route
+            path="collections/add-undefined"
+            element={
+              <DefaultLayout>
+                <AddCollection />
+              </DefaultLayout>
+            }
+          />
+          <Route
+            path="collections/edit-collection/:id"
+            element={
+              <DefaultLayout>
+                <EditCollection />
+              </DefaultLayout>
+            }
+          />
+          <Route
+            path="login/info"
+            element={
+              <DefaultLayout>
+                <LoginInfo />
+              </DefaultLayout>
+            }
+          />
         </Routes>
+        <ToastContainer />
       </div>
     </BrowserRouter>
   );

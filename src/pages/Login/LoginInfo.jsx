@@ -1,54 +1,58 @@
-import React from "react";
 import { Form } from "react-bootstrap";
-import Select from "react-select";
-import { useDispatch } from "react-redux";
-import { useState } from "react";
-
 import Datepicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import { v4 as uuidv4 } from "uuid";
-
+import Select from "react-select";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import useLocationForm from "~/hook/useLocationForm";
-import { registerUser } from "../../pages/UserManage/UserSlice";
-import Header from "../Header";
-import { useNavigate } from "react-router-dom";
 
-function AddUser() {
-  const navigate = useNavigate();
-  const today = new Date();
-  const [values, setValues] = useState({
-    name: "",
-    email: "",
-    address: "",
-    phoneNumber: "",
-    birthday: today,
-    role: "",
-    gender: "",
-    password: "",
-  });
+import { getAllUsers, getUser, updateUser } from "~/pages/UserManage/UserSlice";
+import Header from "~/components/Header";
 
+const LoginInfo = () => {
+  const params = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const userList = useSelector((state) => state.users.values);
 
-  const handleAddUser = (e) => {
-    e.preventDefault();
-    dispatch(
-      registerUser({
-        id: uuidv4(),
-        name: values.name,
-        email: values.email,
-        address: values.address,
-        phoneNumber: values.phoneNumber,
-        birthday: values.birthday,
-        role: values.role,
-        gender: values.gender,
-        password: values.password,
-      })
-    );
-    navigate("/users");
-  };
+  useEffect(() => {
+    dispatch(getAllUsers());
+  }, []);
+  const existingUser = userList.filter((item) => item.role === "admin");
+
+  const [values, setValues] = useState(...existingUser);
+  console.log(userList);
 
   const { state, onCitySelect, onDistrictSelect, onWardSelect } =
     useLocationForm(false);
+
+  // const handleLoginInfo = (e) => {
+  //   e.preventDefault();
+  //   dispatch(
+  //     updateUser({
+  //       id: params.id,
+  //       data: {
+  //         name: values.name,
+  //         email: values.email,
+  //         address: values.address,
+  //         phoneNumber: values.phoneNumber,
+  //         birthday: values.birthday,
+  //         role: values.role,
+  //         gender: values.gender,
+  //         password: values.password,
+  //       },
+  //     })
+  //   );
+  //   setValues({
+  //     name: "",
+  //     email: "",
+  //     address: "",
+  //     password: "",
+  //     phoneNumber: "",
+  //     birthday: new Date(),
+  //   });
+  //   navigate("/users");
+  // };
 
   const {
     cityOptions,
@@ -63,7 +67,7 @@ function AddUser() {
     <>
       <Header title="Quản lý người dùng" />
       <div className="table-wrapper">
-        <Form onClick={() => handleAddUser()}>
+        <Form>
           <div className="row mb-4">
             <div className="col l-6">
               <Form.Group>
@@ -160,7 +164,7 @@ function AddUser() {
                 />
               </Form.Group>
             </div>
-            <div className="col l-6">
+            {/* <div className="col l-6">
               <Form.Group className="form-outline">
                 <Form.Label htmlFor="birthday">Birthday</Form.Label>
                 <Datepicker
@@ -174,7 +178,7 @@ function AddUser() {
                   }}
                 />
               </Form.Group>
-            </div>
+            </div> */}
           </div>
 
           <div className="row mb-4">
@@ -239,15 +243,19 @@ function AddUser() {
             </div>
           </div>
 
-          <div className="row mb-4" style={{ justifyContent: "flex-end" }}>
-            <button type="submit" className="btn btn-primary btn-block col l-2">
-              Add User
+          {/* <div className="row mb-4" style={{ justifyContent: "flex-end" }}>
+            <button
+              type="submit"
+              className="btn btn-primary btn-block col l-2"
+              onClick={() => handleLoginInfo()}
+            >
+              Edit User
             </button>
-          </div>
+          </div> */}
         </Form>
       </div>
     </>
   );
-}
+};
 
-export default AddUser;
+export default LoginInfo;
