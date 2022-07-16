@@ -5,19 +5,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import classnames from "classnames/bind";
 import styles from "./Table.module.scss";
-import Pagination from "../pagination/Pagination";
 
 const cx = classnames.bind(styles);
 
-function Table({
-  title,
-  children,
-  path,
-  totalPagesNum,
-  setCurrentPage,
-  current,
-  sorted,
-}) {
+function Table({ title, children, path }) {
   return (
     <div className={cx("container")}>
       <div className={cx("table-responsive")}>
@@ -35,13 +26,6 @@ function Table({
             )}
           </div>
           {children}
-
-          <Pagination
-            pages={totalPagesNum}
-            setCurrentPage={setCurrentPage}
-            current={current}
-            sorted={sorted}
-          />
         </div>
       </div>
     </div>

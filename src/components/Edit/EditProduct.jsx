@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { updateProduct } from "~/pages/ProductManage/ProductSlice";
 import { getAllCollections } from "~/pages/CollectionManage/CollectionSlice";
+import VndFormat from "../VndFormat/VndFormat";
 
 export default function EditProduct() {
   const params = useParams();
@@ -21,7 +22,7 @@ export default function EditProduct() {
 
   useEffect(() => {
     dispatch(getAllCollections());
-  }, []);
+  }, [dispatch]);
 
   let type = "";
   let collectionTitle = [];
@@ -118,7 +119,7 @@ export default function EditProduct() {
                   type="text"
                   id="prices"
                   name="prices"
-                  value={values.prices}
+                  value={VndFormat(values.prices)}
                   onChange={(e) => {
                     setValues({ ...values, prices: e.target.value });
                   }}
@@ -260,7 +261,7 @@ export default function EditProduct() {
               className="btn btn-primary btn-block col l-2"
               onClick={handleEditProduct}
             >
-              Edit Product
+              Cập nhật
             </button>
           </div>
         </Form>

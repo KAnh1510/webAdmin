@@ -23,7 +23,7 @@ export const CollectionSlice = createSlice({
         state.values = action.payload;
       })
       .addCase(createCollection.fulfilled, (state, action) => {
-        state.push(action.payload);
+        state.values.push(action.payload);
       })
       .addCase(updateCollection.fulfilled, (state, action) => {
         action.payload = state.values.find(

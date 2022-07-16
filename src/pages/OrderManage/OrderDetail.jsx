@@ -9,6 +9,7 @@ import { faPen, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import Header from "../../components/Header";
 import { deleteOrderDetail, getAllOrderDetail } from "./OrderDetailSlice";
 import { getAllProducts } from "../ProductManage/ProductSlice";
+import VndFormat from "~/components/VndFormat/VndFormat";
 
 const cx = classnames.bind(styles);
 function OrderDetail() {
@@ -31,14 +32,6 @@ function OrderDetail() {
     dispatch(deleteOrderDetail({ id: params.id }));
   };
 
-  const vndFormat = (price) => {
-    price = price.toLocaleString("vi", {
-      style: "currency",
-      currency: "VND",
-    });
-    return price;
-  };
-
   return (
     <div>
       <Header title="Quản lý đơn hàng" />
@@ -54,12 +47,11 @@ function OrderDetail() {
               <th>Ảnh</th>
               <th></th>
               <th>Tổng tiền</th>
-              <th>Ghi chú</th>
             </tr>
           </thead>
           <tbody>
             {currentOrderDetail.map((order_detail, index) => {
-              let { id, number, note, product_id } = order_detail;
+              let { id, number, product_id } = order_detail;
               let name_prd = "";
               let prices = 0;
               let imgFront = "";
@@ -75,7 +67,7 @@ function OrderDetail() {
                     }
                   })}
                   <td>{name_prd}</td>
-                  <td>{prices && vndFormat(prices)}</td>
+                  <td>{prices && VndFormat(prices)}</td>
                   <td>nâu</td>
                   <td>L</td>
                   <td>{number}</td>
@@ -104,9 +96,8 @@ function OrderDetail() {
                     </div>
                   </td>
                   <td style={{ color: "red", fontWeight: "600" }}>
-                    {prices && vndFormat(prices * number)}
+                    {prices && VndFormat(prices * number)}
                   </td>
-                  <td>{note}</td>
                 </tr>
               );
             })}

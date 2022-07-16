@@ -20,17 +20,22 @@ const SIDEBAR_MENU = [
   {
     title: "Quản lý danh mục",
     link: "/collections",
-    icon: "albums-outline",
+    icon: "grid-outline",
   },
   {
     title: "Quản lý sản phẩm",
     link: "/products",
-    icon: "chatbox-outline",
+    icon: "albums-outline",
   },
   {
     title: "Quản lý đơn hàng",
     link: "/orders",
     icon: "cart-outline",
+  },
+  {
+    title: "Quản lý phản hồi",
+    link: "/feedbacks",
+    icon: "chatbox-outline",
   },
   {
     title: "Thống kê",

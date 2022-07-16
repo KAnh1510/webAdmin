@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { Form } from "react-bootstrap";
+import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Header from "~/components/Header";
 import styles from "./ProductManage.module.scss";
 import classnames from "classnames/bind";
 import { getProduct } from "./ProductSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllCollections } from "../CollectionManage/CollectionSlice";
 
 const cx = classnames.bind(styles);
 function ProductDetail() {
@@ -15,20 +13,18 @@ function ProductDetail() {
   const navigate = useNavigate();
 
   const productItem = useSelector((state) => state.products.values);
-  const collectionList = useSelector((state) => state.collections.values);
 
   useEffect(() => {
     dispatch(getProduct(params.id));
-    dispatch(getAllCollections());
-  }, []);
+  }, [dispatch, params.id]);
 
   return (
     <>
       <Header title="Quản lý sản phẩm" />
       <div className="table-wrapper">
-        {productItem.map((product, index) => {
+        {productItem.map((product) => {
           return (
-            <div key={index}>
+            <div key={product.id}>
               <div className={cx("name-prd")}>
                 <h2>{product.name}</h2>
               </div>
@@ -36,7 +32,7 @@ function ProductDetail() {
               <div className="row mb-4">
                 <div className="col l-6">
                   <span style={{ fontSize: "1.6rem" }}>Số lượng: </span>
-                  <span style={{ fontSize: "1.4rem", color: "red" }}>
+                  <span style={{ fontSize: "1.3rem", color: "red" }}>
                     {product.number} <span>sản phẩm</span>
                   </span>
                 </div>
@@ -51,8 +47,8 @@ function ProductDetail() {
 
               <div className={cx("gallery")}>
                 <ul className="row">
-                  {product.gallery.map((gallery, index) => (
-                    <li className="col l-3" key={index}>
+                  {product.gallery.map((gallery) => (
+                    <li className="col l-3" key={gallery.id}>
                       <img src={gallery.src} alt="" />
                     </li>
                   ))}

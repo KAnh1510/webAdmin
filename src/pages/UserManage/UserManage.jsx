@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styles from "./UserManage.module.scss";
 import classnames from "classnames/bind";
 import { Link } from "react-router-dom";
@@ -16,16 +16,6 @@ function UserManage() {
   const dispatch = useDispatch();
   const userList = useSelector((state) => state.users.values);
 
-  const users = [...userList];
-  const [currentPage, setCurrentPage] = useState(1);
-  const [UsersPerPage] = useState(6);
-  const sortedUsers = users.sort((a, b) => (a.name < b.name ? -1 : 1));
-
-  const indexOfLastUser = currentPage * UsersPerPage;
-  const indexOfFirstUser = indexOfLastUser - UsersPerPage;
-  const currentUsers = sortedUsers.slice(indexOfFirstUser, indexOfLastUser);
-  const totalPagesNum = Math.ceil(sortedUsers.length / UsersPerPage);
-
   useEffect(() => {
     dispatch(getAllUsers());
   }, [dispatch]);
@@ -37,14 +27,7 @@ function UserManage() {
   return (
     <>
       <Header title="Quản lý người dùng" />
-      <Table
-        title="người dùng"
-        path="user"
-        totalPagesNum={totalPagesNum}
-        current={userList}
-        sorted={sortedUsers}
-        setCurrentPage={setCurrentPage}
-      >
+      <Table title="người dùng" path="user">
         <table className={cx("table")}>
           <thead>
             <tr>
@@ -60,7 +43,7 @@ function UserManage() {
             </tr>
           </thead>
           <tbody>
-            {currentUsers.map((user, index) => {
+            {userList.map((user, index) => {
               const {
                 name,
                 address,

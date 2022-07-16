@@ -6,6 +6,7 @@ import OrdersSlice from "~/pages/OrderManage/OrdersSlice";
 import OrderDetailSlice from "~/pages/OrderManage/OrderDetailSlice";
 import CollectionSlice from "~/pages/CollectionManage/CollectionSlice";
 import AuthSlice from "~/pages/Login/AuthSlice";
+import FeedbackSlice from "~/pages/FeedBacksManage/FeedbackSlice";
 
 const store = configureStore({
   reducer: {
@@ -15,6 +16,7 @@ const store = configureStore({
     products: productSlice.reducer,
     orders: OrdersSlice.reducer,
     order_detail: OrderDetailSlice.reducer,
+    feedback: FeedbackSlice.reducer,
   },
   devTools: true,
 });

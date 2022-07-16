@@ -62,6 +62,13 @@ const AddCollection = () => {
           </div>
           <div className="row mb-4" style={{ justifyContent: "flex-end" }}>
             <button
+              className="btn btn-primary btn-block col l-2"
+              onClick={() => navigate("/collections")}
+            >
+              Quay lại
+            </button>
+
+            <button
               type="submit"
               className="btn btn-primary btn-block col l-2"
               onClick={handleAddCollection}

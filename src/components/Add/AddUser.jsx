@@ -1,14 +1,8 @@
 import React from "react";
 import { Form } from "react-bootstrap";
-import Select from "react-select";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
-
-import Datepicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import { v4 as uuidv4 } from "uuid";
-
-import useLocationForm from "~/hook/useLocationForm";
 import { registerUser } from "../../pages/UserManage/UserSlice";
 import Header from "../Header";
 import { useNavigate } from "react-router-dom";
@@ -200,6 +194,13 @@ function AddUser() {
           </div>
 
           <div className="row mb-4" style={{ justifyContent: "flex-end" }}>
+            <button
+              className="btn btn-primary btn-block col l-2"
+              onClick={() => navigate("/users")}
+            >
+              Quay lại
+            </button>
+
             <button type="submit" className="btn btn-primary btn-block col l-2">
               Thêm người dùng
             </button>

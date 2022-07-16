@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styles from "./ProductManage.module.scss";
 import classnames from "classnames/bind";
 import { Link } from "react-router-dom";
@@ -11,25 +11,13 @@ import Table from "../../components/Table";
 import Header from "../../components/Header";
 import { deleteProduct, getAllProducts } from "./ProductSlice";
 import { getAllCollections } from "../CollectionManage/CollectionSlice";
+import VndFormat from "~/components/VndFormat/VndFormat";
 
 const cx = classnames.bind(styles);
 function ProductManage() {
   const dispatch = useDispatch();
   const productList = useSelector((state) => state.products.values);
   const collectionList = useSelector((state) => state.collections.values);
-
-  const products = [...productList];
-  const [currentPage, setCurrentPage] = useState(1);
-  const [ProductsPerPage] = useState(3);
-  const sortedProducts = products.sort((a, b) => (a.name < b.name ? -1 : 1));
-
-  const indexOfLastProduct = currentPage * ProductsPerPage;
-  const indexOfFirstProduct = indexOfLastProduct - ProductsPerPage;
-  const currentProducts = sortedProducts.slice(
-    indexOfFirstProduct,
-    indexOfLastProduct
-  );
-  const totalPagesNum = Math.ceil(sortedProducts.length / ProductsPerPage);
 
   useEffect(() => {
     dispatch(getAllProducts());
@@ -43,15 +31,8 @@ function ProductManage() {
   return (
     <>
       <Header title="Quản lý sản phẩm" />
-      <Table
-        title="sản phẩm"
-        path="product"
-        totalPagesNum={totalPagesNum}
-        current={currentProducts}
-        sorted={sortedProducts}
-        setCurrentPage={setCurrentPage}
-      >
-        <table className={cx("table")}>
+      <Table title="sản phẩm" path="product">
+        <table className={cx("table")} style={{ height: "60vh" }}>
           <thead>
             <tr>
               <th>Tên sản phẩm</th>
@@ -67,7 +48,7 @@ function ProductManage() {
             </tr>
           </thead>
           <tbody>
-            {currentProducts.map((product, index) => {
+            {productList.map((product, index) => {
               const { name, prices, subtle, imgFront, imgBack, color, size } =
                 product;
               let type = "";
@@ -83,7 +64,7 @@ function ProductManage() {
                   })}
                   <td>{type}</td>
                   <td>{subtle}</td>
-                  <td>{prices}</td>
+                  <td>{VndFormat(prices)}</td>
                   <td>
                     {color
                       ? color.map((item, index) => (

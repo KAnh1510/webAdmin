@@ -1,0 +1,41 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  padding: 10px 10px;
+  border-bottom: 1px dotted #dfe0e1;
+
+  &:hover {
+    cursor: pointer;
+    .name {
+      opacity: 0.8;
+    }
+  }
+}
+
+.image {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+}
+
+.info {
+  margin-left: 12px;
+  flex: 1;
+}
+
+.name {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: pre;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: #000;
+  margin-bottom: 4px;
+}
+
+.prices {
+  font-size: 0.9rem;
+  color: #333333;
+  line-height: 15px;
+}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styles from "./Order.module.scss";
 import classnames from "classnames/bind";
 import { Link } from "react-router-dom";
@@ -15,16 +15,6 @@ function OrderManage() {
   const ordersList = useSelector((state) => state.orders.values);
   const usersList = useSelector((state) => state.users.values);
 
-  const orders = [...ordersList];
-  const [currentPage, setCurrentPage] = useState(1);
-  const [OrdersPerPage] = useState(7);
-  const sortedOrders = orders.sort((a, b) => (a.name < b.name ? -1 : 1));
-
-  const indexOfLastOrder = currentPage * OrdersPerPage;
-  const indexOfFirstOrder = indexOfLastOrder - OrdersPerPage;
-  const currentOrders = sortedOrders.slice(indexOfFirstOrder, indexOfLastOrder);
-  const totalPagesNum = Math.ceil(sortedOrders.length / OrdersPerPage);
-
   useEffect(() => {
     dispatch(getAllOrders());
     dispatch(getAllUsers());
@@ -33,12 +23,7 @@ function OrderManage() {
   return (
     <div>
       <Header title="Quản lý đơn hàng" />
-      <Table
-        totalPagesNum={totalPagesNum}
-        current={currentOrders}
-        sorted={sortedOrders}
-        setCurrentPage={setCurrentPage}
-      >
+      <Table>
         <table className={cx("table")}>
           <thead>
             <tr>
@@ -47,11 +32,12 @@ function OrderManage() {
               <th>Email</th>
               <th>Số điện thoại</th>
               <th>Ngày tạo</th>
+              <th>Ghi chú</th>
               <th></th>
             </tr>
           </thead>
           <tbody>
-            {currentOrders.map((order, index) => {
+            {ordersList.map((order, index) => {
               let name = "";
               let email = "";
               let address = "";
@@ -71,6 +57,7 @@ function OrderManage() {
                   <td>{email}</td>
                   <td>{phone_number}</td>
                   <td>{order.create_at}</td>
+                  <td>{order.note}</td>
                   <td>
                     <Link to={`order_detail/${order.id}`}>
                       Chi tiết đơn hàng

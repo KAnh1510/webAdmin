@@ -47,7 +47,7 @@ export default function AddProduct() {
 
   useEffect(() => {
     dispatch(getAllCollections());
-  }, []);
+  }, [dispatch]);
 
   let type = "";
   let collectionTitle = collectionList.map((collection) => collection.title);
@@ -282,11 +282,17 @@ export default function AddProduct() {
 
           <div className="row mb-4" style={{ justifyContent: "flex-end" }}>
             <button
+              className="btn btn-primary btn-block col l-2"
+              onClick={() => navigate("/products")}
+            >
+              Quay lại
+            </button>
+            <button
               type="submit"
               className="btn btn-primary btn-block col l-2"
               onClick={handleAddProduct}
             >
-              Add Product
+              Thêm sản phẩm
             </button>
           </div>
         </Form>
