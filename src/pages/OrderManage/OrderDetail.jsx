@@ -51,7 +51,7 @@ function OrderDetail() {
           </thead>
           <tbody>
             {currentOrderDetail.map((order_detail, index) => {
-              let { id, number, product_id } = order_detail;
+              let { id, number, product_id, color, size } = order_detail;
               let name_prd = "";
               let prices = 0;
               let imgFront = "";
@@ -68,8 +68,17 @@ function OrderDetail() {
                   })}
                   <td>{name_prd}</td>
                   <td>{prices && VndFormat(prices)}</td>
-                  <td>nâu</td>
-                  <td>L</td>
+                  <td>
+                    <span
+                      style={{
+                        padding: "6px 16px",
+                        borderRadius: "50%",
+                        backgroundColor: `${color}`,
+                      }}
+                    ></span>
+                  </td>
+
+                  <td>{size ? size : ""}</td>
                   <td>{number}</td>
                   <td>
                     <img src={imgFront} alt="front" />

@@ -68,7 +68,6 @@ export const createProduct = createAsyncThunk(
       color,
       gallery,
     });
-    console.log(res.data);
     return res.data;
   }
 );

@@ -3,12 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers, updateUser } from "../UserManage/UserSlice";
 import Header from "~/components/Header";
 import { Form } from "react-bootstrap";
+import StorageKeys from "~/constant/storage-keys";
 
 function Account() {
   const dispatch = useDispatch();
   const today = new Date();
   const userList = useSelector((state) => state.users.values);
-  const authUser = JSON.parse(localStorage.getItem("currentAdmin"));
+  const authUser = JSON.parse(localStorage.getItem(StorageKeys.admin));
 
   useEffect(() => {
     dispatch(getAllUsers());
