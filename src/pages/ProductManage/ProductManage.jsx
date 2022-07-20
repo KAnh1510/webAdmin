@@ -22,7 +22,7 @@ function ProductManage() {
   useEffect(() => {
     dispatch(getAllProducts());
     dispatch(getAllCollections());
-  }, [dispatch]);
+  }, []);
 
   const handleRemoveProduct = (id) => {
     dispatch(deleteProduct({ id: id }));

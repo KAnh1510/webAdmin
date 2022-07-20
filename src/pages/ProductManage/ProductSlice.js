@@ -23,7 +23,7 @@ export const productSlice = createSlice({
         state.values = action.payload;
       })
       .addCase(createProduct.fulfilled, (state, action) => {
-        state.push(action.payload);
+        state.values.push(action.payload);
       })
       .addCase(updateProduct.fulfilled, (state, action) => {
         action.payload = state.values.find(
@@ -43,7 +43,7 @@ export const productSlice = createSlice({
 });
 
 export const createProduct = createAsyncThunk(
-  "product",
+  "create/product",
   async ({
     id,
     name,
@@ -52,6 +52,7 @@ export const createProduct = createAsyncThunk(
     imgFront,
     imgBack,
     collection_id,
+    number,
     size,
     color,
     gallery,
@@ -64,6 +65,7 @@ export const createProduct = createAsyncThunk(
       imgFront,
       imgBack,
       collection_id,
+      number,
       size,
       color,
       gallery,

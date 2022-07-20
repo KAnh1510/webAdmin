@@ -1,21 +1,22 @@
 import { Form } from "react-bootstrap";
 import React, { useEffect, useState } from "react";
-import Header from "../Header";
-import { useNavigate, useParams } from "react-router-dom";
+import InputColor from "react-input-color";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import styles from "../../pages/ProductManage/ProductManage.module.scss";
+import classnames from "classnames/bind";
+
+import Header from "../Header";
 import { createProduct } from "~/pages/ProductManage/ProductSlice";
 import { getAllCollections } from "~/pages/CollectionManage/CollectionSlice";
 
+const cx = classnames.bind(styles);
 export default function AddProduct() {
-  const params = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const productEdit = useSelector((state) => state.products.values);
+  const [idColor, setIdColor] = React.useState([]);
   const collectionList = useSelector((state) => state.collections.values);
 
-  const productFilter = productEdit.filter(
-    (item) => item.id === parseInt(params.id, 10)
-  );
   const data = {
     id: 0,
     name: "",
@@ -24,26 +25,10 @@ export default function AddProduct() {
     prices: 0,
     imgFront: "",
     imgBack: "",
-    size: [
-      {
-        id: 1,
-        name: "M",
-      },
-    ],
-    color: [
-      {
-        idColor: "#000000",
-        name_color: "Black",
-      },
-    ],
-    gallery: [
-      {
-        id: 1,
-        src: "https://product.hstatic.net/200000436739/product/0db50047-70f4-4bc3-8e1e-9a48be0e49b0_a207335ee455425d9ebca682512e962b_master.jpeg",
-      },
-    ],
+    number: 0,
   };
   const [values, setValues] = useState({ ...data });
+  const [checked, setChecked] = useState([]);
 
   useEffect(() => {
     dispatch(getAllCollections());
@@ -51,12 +36,51 @@ export default function AddProduct() {
 
   let type = "";
   let collectionTitle = collectionList.map((collection) => collection.title);
-  //   collectionList.forEach((collection) => {
-  //     if (collection.id === values.collection_id) {
-  //       type = collection.title;
-  //     }
-  //     collectionTitle.push(collection.title);
-  //   });
+
+  const color = [];
+  const size = [];
+  const [gallery, setGallery] = useState([
+    { id: Math.floor(Math.random(100) * 10 + 1), src: "" },
+  ]);
+
+  color.push({ idColor: idColor.hex });
+
+  const sizeList = ["S", "M", "L", "XL"];
+  const handleCheck = (event) => {
+    var updatedList = [...checked];
+    if (event.target.checked) {
+      updatedList = [...checked, event.target.value];
+    } else {
+      updatedList.splice(checked.indexOf(event.target.value), 1);
+    }
+    setChecked(updatedList);
+  };
+  var checkedItems = checked.length ? checked.map((item) => item) : "";
+  Array.isArray(checkedItems)
+    ? checkedItems.map((item) =>
+        size.push({ id: Math.floor(Math.random(100) * 10 + 1), name: item })
+      )
+    : (checkedItems = []);
+
+  const handleGalleryChange = (e, index) => {
+    const { name, value } = e.target;
+    const list = [...gallery];
+    list[index][name] = value;
+    setGallery(list);
+  };
+
+  const handleAddImg = () => {
+    setGallery([
+      ...gallery,
+      { id: Math.floor(Math.random(100) * 10 + 1), src: "" },
+    ]);
+  };
+
+  const handleRemoveImg = (index) => {
+    const list = [...gallery];
+    list.splice(index, 1);
+    setGallery(list);
+  };
 
   const handleAddProduct = (e) => {
     e.preventDefault();
@@ -69,9 +93,10 @@ export default function AddProduct() {
         prices: values.prices,
         imgFront: values.imgFront,
         imgBack: values.imgBack,
-        size: values.size,
-        color: values.color,
-        gallery: values.gallery,
+        number: values.number,
+        size: size,
+        color: color,
+        gallery: gallery,
       })
     );
     navigate("/products");
@@ -82,6 +107,7 @@ export default function AddProduct() {
       <Header title="Quản lý người dùng" />
       <div className="table-wrapper">
         <Form>
+          {/* name, subtle, collection, price */}
           <div className="row mb-4">
             <div className="col l-3">
               <Form.Group>
@@ -114,7 +140,6 @@ export default function AddProduct() {
             <div className="col l-3">
               <Form.Group>
                 <Form.Label htmlFor="type">Danh mục: </Form.Label>
-
                 <Form.Control
                   as="select"
                   values={type}
@@ -134,12 +159,11 @@ export default function AddProduct() {
                 </Form.Control>
               </Form.Group>
             </div>
-
             <div className="col l-3">
               <Form.Group>
                 <Form.Label htmlFor="imgFront">Giá: </Form.Label>
                 <Form.Control
-                  type="text"
+                  type="number"
                   id="prices"
                   name="prices"
                   value={values.prices}
@@ -151,6 +175,7 @@ export default function AddProduct() {
             </div>
           </div>
 
+          {/* imgfront, color,number */}
           <div className="row mb-4">
             <div className="col l-4">
               <Form.Group>
@@ -178,35 +203,46 @@ export default function AddProduct() {
                 />
               </div>
             </div>
-            <div className="col l-4">
+
+            <div className="col l-3">
               <Form.Group>
                 <Form.Label htmlFor="imgFront">Màu: </Form.Label>
                 <ul
                   style={{ display: "flex", justifyContent: "space-between" }}
                 >
-                  {values.color
-                    ? values.color.map((colorItem, index) => {
-                        return (
-                          <li key={index}>
-                            <Form.Control
-                              type="color"
-                              value={colorItem.idColor}
-                              onChange={(e) => {
-                                setValues({
-                                  ...values,
-                                  // color: e.target.value,
-                                });
-                              }}
-                            />
-                          </li>
-                        );
-                      })
-                    : ""}
+                  <InputColor
+                    initialValue="#5e72e4"
+                    onChange={setIdColor}
+                    placement="right"
+                  />
+                  <div
+                    style={{
+                      width: "50",
+                      height: "50",
+                      marginTop: "20",
+                      backgroundColor: idColor.hex,
+                    }}
+                  />
                 </ul>
+              </Form.Group>
+            </div>
+            <div className="col l-2">
+              <Form.Group>
+                <Form.Label htmlFor="imgFront">Số lượng: </Form.Label>
+                <Form.Control
+                  type="number"
+                  id="number"
+                  name="number"
+                  value={values.number}
+                  onChange={(e) => {
+                    setValues({ ...values, number: e.target.value });
+                  }}
+                />
               </Form.Group>
             </div>
           </div>
 
+          {/* imgBack, size */}
           <div className="row mb-4">
             <div className="col l-4">
               <Form.Group>
@@ -231,54 +267,66 @@ export default function AddProduct() {
                 />
               </div>
             </div>
+
             <div className="col l-4">
               <Form.Group>
                 <Form.Label htmlFor="imgFront">Size: </Form.Label>
-                {values.size.map((item, index) => (
-                  <Form.Control
-                    key={index}
-                    value={item.name}
-                    className="mb-4"
-                    onChange={(e) => {
-                      setValues({
-                        ...values,
-                        // size: e.target.value,
-                      });
-                    }}
-                  />
+                {sizeList.map((item, index) => (
+                  <div key={index}>
+                    <input
+                      value={item}
+                      type="checkbox"
+                      onChange={handleCheck}
+                    />
+                    <span>{item}</span>
+                  </div>
                 ))}
               </Form.Group>
             </div>
           </div>
 
-          <div>
-            <Form.Group>
-              <Form.Label htmlFor="gallery">Mô tả: </Form.Label>
-              {values.gallery.map((item) => (
-                <div key={item.id} className="row mb-4">
-                  <div className="col l-6 mb-4">
-                    <Form.Control
-                      id="gallery"
-                      name="gallery"
-                      value={item.src}
-                      onChange={(e) => {
-                        // setValues({ ...values, src: e.target.value });
-                      }}
-                    />
-                  </div>
-                  <div className="col l-2">
-                    <div style={{ width: "100%", border: "1px solid #ccc" }}>
-                      <img
-                        style={{ width: "100%" }}
-                        src={item.src}
-                        alt="imgFront"
-                      />
-                    </div>
-                  </div>
+          {/* gallery */}
+          <Form.Label htmlFor="gallery">Mô tả: </Form.Label>
+          {gallery.map((item, index) => (
+            <div className="row mb-4" key={index}>
+              <div className="col l-4">
+                <Form.Group>
+                  <Form.Control
+                    type="text"
+                    id="src"
+                    name="src"
+                    value={item.src}
+                    onChange={(e) => handleGalleryChange(e, index)}
+                  />
+
+                  {gallery.length - 1 === index && gallery.length < 5 && (
+                    <button
+                      className={cx("btn-gallery", "add")}
+                      onClick={handleAddImg}
+                    >
+                      Thêm
+                    </button>
+                  )}
+                </Form.Group>
+              </div>
+              <div className="col l-2">
+                <div style={{ width: "100%", border: "1px solid #ccc" }}>
+                  <img style={{ width: "100%" }} src={item.src} alt="src" />
                 </div>
-              ))}
-            </Form.Group>
-          </div>
+              </div>
+
+              {gallery.length !== 1 && (
+                <div className="col l-2 ">
+                  <button
+                    className={cx("btn-gallery", "remove")}
+                    onClick={() => handleRemoveImg(index)}
+                  >
+                    Xóa
+                  </button>
+                </div>
+              )}
+            </div>
+          ))}
 
           <div className="row mb-4" style={{ justifyContent: "flex-end" }}>
             <button

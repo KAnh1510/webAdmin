@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Header from "~/components/Header";
+import VndFormat from "~/components/VndFormat/VndFormat";
 import { getAllOrders } from "../OrderManage/OrdersSlice";
 
 function Statistical() {
@@ -10,6 +11,12 @@ function Statistical() {
   useEffect(() => {
     dispatch(getAllOrders());
   }, []);
+
+  let month = 0;
+  let year = 0;
+
+  let totalItem = 0;
+  let arrTmp = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
   return (
     <div>
@@ -21,20 +28,27 @@ function Statistical() {
             <th>Tổng doanh thu</th>
           </tr>
         </thead>
+
         <tbody>
-          {orderList.map((order) => {
-            const temp = new Date(order.create_at);
-            let total = 0;
-
-            const month = temp.getMonth() + 1; // tháng
-            const year = temp.getFullYear(); // năm
-
-            return (
-              <tr>
+          {arrTmp.map((i, index) => {
+            totalItem = 0;
+            // eslint-disable-next-line no-loop-func
+            orderList.forEach((order) => {
+              const tempInter = new Date(order.create_at);
+              month = tempInter.getMonth() + 1;
+              year = tempInter.getFullYear();
+              if (month === i) {
+                totalItem += order.total_money;
+              }
+            });
+            return totalItem === 0 ? (
+              <tr key={index}></tr>
+            ) : (
+              <tr key={index}>
                 <td>
-                  {month} / {year}
+                  {i} / {year}
                 </td>
-                <td>{total}</td>
+                <td>{totalItem ? VndFormat(totalItem) : ""}</td>
               </tr>
             );
           })}

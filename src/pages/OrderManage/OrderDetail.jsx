@@ -28,8 +28,8 @@ function OrderDetail() {
     dispatch(getAllProducts());
   }, [dispatch]);
 
-  const handleRemoveProduct = () => {
-    dispatch(deleteOrderDetail({ id: params.id }));
+  const handleRemoveProduct = (id) => {
+    dispatch(deleteOrderDetail({ id: id }));
   };
 
   return (
@@ -50,14 +50,14 @@ function OrderDetail() {
             </tr>
           </thead>
           <tbody>
-            {currentOrderDetail.map((order_detail, index) => {
+            {currentOrderDetail.map((order_detail) => {
               let { id, number, product_id, color, size } = order_detail;
               let name_prd = "";
               let prices = 0;
               let imgFront = "";
 
               return (
-                <tr key={index} className={cx("tr-2")}>
+                <tr key={order_detail.id} className={cx("tr-2")}>
                   {productList.forEach((product) => {
                     const check = product.id === product_id;
                     if (check) {
@@ -98,7 +98,7 @@ function OrderDetail() {
                         className={cx("btn", "delete")}
                         title="Delete"
                         data-toggle="tooltip"
-                        onClick={handleRemoveProduct}
+                        onClick={() => handleRemoveProduct(id)}
                       >
                         <FontAwesomeIcon icon={faTrashCan} />
                       </button>

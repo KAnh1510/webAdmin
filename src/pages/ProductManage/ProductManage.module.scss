@@ -19,3 +19,24 @@
     }
   }
 }
+
+.btn-gallery {
+  background: none;
+  outline: none;
+  cursor: pointer;
+  font-weight: 500;
+  border-radius: 2px;
+  padding: 5px 10px;
+}
+.add {
+  align-self: flex-start;
+  display: flex;
+  align-items: center;
+  margin-top: 0.5rem;
+  color: rgb(0, 208, 255);
+  border: 1px solid rgb(0, 208, 255);
+}
+.remove {
+  color: red;
+  border: 1px solid red;
+}

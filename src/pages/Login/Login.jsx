@@ -18,7 +18,7 @@ const Login = () => {
       await dispatch(
         loginUser({
           user_id: currentUser[0].id,
-          role: "user",
+          role: "admin",
           email: values.email,
           password: values.password,
           login_at: new Date().toLocaleString(),

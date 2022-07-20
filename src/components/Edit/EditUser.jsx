@@ -54,15 +54,6 @@ const EditUser = () => {
     navigate("/users");
   };
 
-  const {
-    cityOptions,
-    districtOptions,
-    wardOptions,
-    selectedCity,
-    selectedDistrict,
-    selectedWard,
-  } = state;
-
   return (
     <>
       <Header title="Quản lý người dùng" />
@@ -120,38 +111,6 @@ const EditUser = () => {
             <div className="col l-6">
               <Form.Group>
                 <Form.Label htmlFor="address">Address</Form.Label>
-                <Select
-                  name="cityId"
-                  key={`cityId_${selectedCity?.value}`}
-                  className="mb-4"
-                  isDisabled={cityOptions.length === 0}
-                  options={cityOptions}
-                  onChange={(option) => onCitySelect(option)}
-                  placeholder="Tỉnh/Thành"
-                  defaultValue={selectedCity}
-                />
-
-                <Select
-                  name="districtId"
-                  key={`districtId_${selectedDistrict?.value}`}
-                  isDisabled={districtOptions.length === 0}
-                  options={districtOptions}
-                  className="mb-4"
-                  onChange={(option) => onDistrictSelect(option)}
-                  placeholder="Quận/Huyện"
-                  defaultValue={selectedDistrict}
-                />
-
-                <Select
-                  name="wardId"
-                  key={`wardId_${selectedWard?.value}`}
-                  isDisabled={wardOptions.length === 0}
-                  options={wardOptions}
-                  className="mb-4"
-                  placeholder="Phường/Xã"
-                  onChange={(option) => onWardSelect(option)}
-                  defaultValue={selectedWard}
-                />
                 <Form.Control
                   type="text"
                   id="address"
@@ -164,21 +123,6 @@ const EditUser = () => {
                 />
               </Form.Group>
             </div>
-            {/* <div className="col l-6">
-              <Form.Group className="form-outline">
-                <Form.Label htmlFor="birthday">Birthday</Form.Label>
-                <Datepicker
-                  selected={values.birthday}
-                  className="form-control"
-                  custom="true"
-                  placeholder={values.birthday}
-                  value={values.birthday}
-                  onChange={(e) => {
-                    setValues({ ...values, birthday: e.target.value });
-                  }}
-                />
-              </Form.Group>
-            </div> */}
           </div>
 
           <div className="row mb-4">
@@ -249,7 +193,7 @@ const EditUser = () => {
               className="btn btn-primary btn-block col l-2"
               onClick={handleEditUser}
             >
-              Edit User
+              Cập nhật thông tin
             </button>
           </div>
         </Form>

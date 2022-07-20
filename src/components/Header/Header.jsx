@@ -13,7 +13,7 @@ function Header({ title }) {
       <div className={cx("col l-6")}>
         <ol className={cx("breadcrumb-list")}>
           <li className={cx("breadcrumb-item")}>
-            <Link to="/">Trang chủ</Link>
+            <Link to="/account">Trang chủ</Link>
           </li>
           <li className={cx("breadcrumb-item", "active")}>{title}</li>
         </ol>

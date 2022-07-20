@@ -1,11 +1,16 @@
 import { Form } from "react-bootstrap";
 import React, { useEffect, useState } from "react";
-import Header from "../Header";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import styles from "../../pages/ProductManage/ProductManage.module.scss";
+import classnames from "classnames/bind";
+
+import Header from "../Header";
 import { updateProduct } from "~/pages/ProductManage/ProductSlice";
 import { getAllCollections } from "~/pages/CollectionManage/CollectionSlice";
 import VndFormat from "../VndFormat/VndFormat";
+import InputColor from "react-input-color";
+const cx = classnames.bind(styles);
 
 export default function EditProduct() {
   const params = useParams();
@@ -19,6 +24,7 @@ export default function EditProduct() {
   );
 
   const [values, setValues] = useState(...productFilter);
+  // const [idColor, setIdColor] = React.useState(values.color);
 
   useEffect(() => {
     dispatch(getAllCollections());
@@ -33,6 +39,41 @@ export default function EditProduct() {
     collectionTitle.push(collection.title);
   });
 
+  const [size, setSize] = useState(values.size);
+  const handleSizeChange = (e, index) => {
+    const { name, value } = e.target;
+    const list = [...size];
+    list[index][name] = value;
+    setSize(list);
+  };
+  const handleAddSize = () => {
+    setSize([...size, { id: Math.floor(Math.random(100) * 10 + 1), name: "" }]);
+  };
+  const handleRemoveSize = (index) => {
+    const list = [...size];
+    list.splice(index, 1);
+    setSize(list);
+  };
+
+  const [gallery, setGallery] = useState(values.gallery);
+  const handleGalleryChange = (e, index) => {
+    const { name, value } = e.target;
+    const list = [...gallery];
+    list[index][name] = value;
+    setGallery(list);
+  };
+  const handleAddImg = () => {
+    setGallery([
+      ...gallery,
+      { id: Math.floor(Math.random(100) * 10 + 1), src: "" },
+    ]);
+  };
+  const handleRemoveImg = (index) => {
+    const list = [...gallery];
+    list.splice(index, 1);
+    setGallery(list);
+  };
+
   const handleEditProduct = (e) => {
     e.preventDefault();
     dispatch(
@@ -45,9 +86,10 @@ export default function EditProduct() {
           prices: values.prices,
           imgFront: values.imgFront,
           imgBack: values.imgBack,
-          size: values.size,
+          number: values.number,
+          size: size,
           color: values.color,
-          gallery: values.gallery,
+          gallery: gallery,
         },
       })
     );
@@ -116,10 +158,10 @@ export default function EditProduct() {
               <Form.Group>
                 <Form.Label htmlFor="imgFront">Giá: </Form.Label>
                 <Form.Control
-                  type="text"
+                  type="number"
                   id="prices"
                   name="prices"
-                  value={VndFormat(values.prices)}
+                  value={values.prices}
                   onChange={(e) => {
                     setValues({ ...values, prices: e.target.value });
                   }}
@@ -155,7 +197,7 @@ export default function EditProduct() {
                 />
               </div>
             </div>
-            <div className="col l-4">
+            <div className="col l-3">
               <Form.Group>
                 <Form.Label htmlFor="imgFront">Màu: </Form.Label>
                 <ul
@@ -164,20 +206,37 @@ export default function EditProduct() {
                   {values.color.map((colorItem, index) => {
                     return (
                       <li key={index}>
-                        <Form.Control
-                          type="color"
-                          value={colorItem.idColor}
-                          onChange={(e) => {
-                            setValues({
-                              ...values,
-                              color: e.target.value,
-                            });
+                        <InputColor
+                          initialValue={colorItem.idColor}
+                          placement="right"
+                        />
+                        <div
+                          style={{
+                            width: "50",
+                            height: "50",
+                            marginTop: "20",
+                            backgroundColor: colorItem.idColor,
                           }}
                         />
                       </li>
                     );
                   })}
                 </ul>
+              </Form.Group>
+            </div>
+
+            <div className="col l-1">
+              <Form.Group>
+                <Form.Label htmlFor="imgFront">Số lượng: </Form.Label>
+                <Form.Control
+                  type="number"
+                  id="number"
+                  name="number"
+                  value={values.number}
+                  onChange={(e) => {
+                    setValues({ ...values, number: e.target.value });
+                  }}
+                />
               </Form.Group>
             </div>
           </div>
@@ -209,51 +268,91 @@ export default function EditProduct() {
             <div className="col l-4">
               <Form.Group>
                 <Form.Label htmlFor="imgFront">Size: </Form.Label>
-                {values.size.map((item, index) => (
-                  <Form.Control
-                    key={index}
-                    value={item.name}
-                    className="mb-4"
-                    onChange={(e) => {
-                      setValues({
-                        ...values,
-                        size: e.target.value,
-                      });
-                    }}
-                  />
-                ))}
+                {size.length === 0 ? (
+                  <button
+                    className={cx("btn-gallery", "add")}
+                    onClick={handleAddSize}
+                  >
+                    Thêm
+                  </button>
+                ) : (
+                  size.map((item, index) => (
+                    <div key={item.id} className="row mb-4">
+                      <div className="col l-6">
+                        <Form.Control
+                          id="size"
+                          name="name"
+                          value={item.name}
+                          onChange={(e) => handleSizeChange(e, index)}
+                        />
+                        {size.length - 1 === index && size.length < 6 && (
+                          <button
+                            className={cx("btn-gallery", "add")}
+                            onClick={handleAddSize}
+                          >
+                            Thêm
+                          </button>
+                        )}
+                      </div>
+                      {size.length !== 1 && (
+                        <div className="col l-6">
+                          <button
+                            className={cx("btn-gallery", "remove")}
+                            onClick={() => handleRemoveSize(index)}
+                          >
+                            Xóa
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  ))
+                )}
               </Form.Group>
             </div>
           </div>
 
-          <div>
-            <Form.Group>
-              <Form.Label htmlFor="gallery">Mô tả: </Form.Label>
-              {values.gallery.map((item) => (
-                <div key={item.id} className="row mb-4">
-                  <div className="col l-6 mb-4">
-                    <Form.Control
-                      id="gallery"
-                      name="gallery"
-                      value={item.src}
-                      onChange={(e) => {
-                        setValues({ ...values, src: e.target.value });
-                      }}
+          <Form.Group>
+            <Form.Label htmlFor="gallery">Mô tả: </Form.Label>
+            {gallery.map((item, index) => (
+              <div key={item.id} className="row mb-4">
+                <div className="col l-6 mb-4">
+                  <Form.Control
+                    id="gallery"
+                    name="gallery"
+                    value={item.src}
+                    onChange={(e) => handleGalleryChange(e, index)}
+                  />
+                  {gallery.length - 1 === index && gallery.length < 6 && (
+                    <button
+                      className={cx("btn-gallery", "add")}
+                      onClick={handleAddImg}
+                    >
+                      Thêm
+                    </button>
+                  )}
+                </div>
+                <div className="col l-2">
+                  <div style={{ width: "100%", border: "1px solid #ccc" }}>
+                    <img
+                      style={{ width: "100%" }}
+                      src={item.src}
+                      alt="imgFront"
                     />
                   </div>
-                  <div className="col l-2">
-                    <div style={{ width: "100%", border: "1px solid #ccc" }}>
-                      <img
-                        style={{ width: "100%" }}
-                        src={item.src}
-                        alt="imgFront"
-                      />
-                    </div>
-                  </div>
                 </div>
-              ))}
-            </Form.Group>
-          </div>
+                {gallery.length !== 1 && (
+                  <div className="col l-2 ">
+                    <button
+                      className={cx("btn-gallery", "remove")}
+                      onClick={() => handleRemoveImg(index)}
+                    >
+                      Xóa
+                    </button>
+                  </div>
+                )}
+              </div>
+            ))}
+          </Form.Group>
 
           <div className="row mb-4" style={{ justifyContent: "flex-end" }}>
             <button
